@@ -13,7 +13,7 @@ export const spritesMap = [
         name: 'Pisos',
         category: 'floor', 
         sprites: [
-            { name: 'Água', path: '/sprites/floor/agua.png', soundPath: '/flamengo.mp3'},
+            { name: 'Água', path: '/sprites/floor/agua.png', soundPath: '/water-walk.mp3'},
             { name: 'Areia', path: '/sprites/floor/areia.png'},
             { name: 'Carpete', path: '/sprites/floor/carpete.png'},
             { name: 'Cascalho', path: '/sprites/floor/cascalho.png'},
