@@ -1,0 +1,138 @@
+import styles from './Menu.module.css'
+
+import { FaPlus } from "react-icons/fa6";
+import { IoMdSave } from "react-icons/io";
+import { FaFolderOpen } from "react-icons/fa";
+import { useTileMap } from '../../contexts/TileMapContext';
+import { Modal } from '../Modal';
+
+import { useState, useRef } from 'react';
+
+export function Menu(){
+
+    const { tilemap, setTilemap, setSelectedSprite, setSelectedLayerSprite, setHistory, history } = useTileMap();
+
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const reset = () => {
+        setSelectedSprite({})
+        setSelectedLayerSprite({x: -1, y: -1})
+        setHistory([])
+        setTilemap({
+            width: 10,
+            height: 10,
+            tileSize: 32,
+            spriteSheetPath: '',
+            layers: [
+                { id: 'floor', name: 'Pisos', visible: true, sprites: [] },
+                { id: 'walls', name: 'Paredes', visible: true, sprites: [] },
+                { id: 'door', name: 'Portas e Janelas', visible: true, sprites: [] },
+                { id: 'furniture', name: 'Móveis', visible: true, sprites: [] },
+                { id: 'utensils', name: 'Utensílios', visible: true, sprites: [] }
+            ],
+        })
+    }
+
+    const download = () => {
+        const jsonString = JSON.stringify(tilemap, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'tilemap.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    // SALVAR
+    const [isModalSave, setModalSave] = useState(false);
+    const openModalSave = () => {
+        setModalSave(true);
+    }
+    const saveJSON = () => {
+        download();
+        setModalSave(false);
+    }
+    const cancel = () => {
+        setModalSave(false);
+    }
+
+    // NOVO
+    const [isModalNew, setModalNew] = useState(false);
+    const openModalNew = () => {
+        if(history.length > 0){
+            setModalNew(true)
+        }
+    }
+    const saveNew = () => {
+        download()
+        reset()
+        setModalNew(false)
+    }
+    const cancelNew = () => {
+        reset()
+        setModalNew(false)
+    }
+
+    // CARREGAR
+    const fileInputRef = useRef(null);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const json = JSON.parse(event.target.result);
+                setTilemap(json);
+            }
+            catch (e) {
+                alert("Erro ao carregar o arquivo. Verifique o formato do JSON.");
+            }
+        }
+        reader.readAsText(file);
+    }
+
+
+    return(
+        <div className={styles.menuContainer} >
+            <Modal 
+                isOpen={isModalNew} 
+                onConfirm={saveNew}
+                onCancel={cancelNew}
+            >
+                <h2>Deseja salvar o projeto em andamento?</h2>
+            </Modal>
+
+            <Modal 
+                isOpen={isModalSave} 
+                onConfirm={saveJSON}
+                onCancel={cancel}
+            >
+                <h2>Deseja salvar o projeto em andamento?</h2>
+            </Modal>
+
+            <div className={styles.menuItem} onClick={openModalNew}>
+                <FaPlus className={styles.menuIcone} />
+                <h3>Novo</h3>
+            </div>
+
+            <div className={styles.menuItem} onClick={openModalSave}>
+                <IoMdSave className={styles.menuIcone} />
+                <h3>Salvar</h3>
+            </div>
+
+            <div className={styles.menuItem} >
+                <label htmlFor="tile" style={ { display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' } }>
+                    <FaFolderOpen className={styles.menuIcone} />
+                    <h3>Abrir</h3>
+                </label>
+                
+                <input type="file" accept=".json" id="tile" ref={fileInputRef} onChange={handleFileChange} style={{ display: "none" }}/>
+            </div>
+        </div>
+    )
+}

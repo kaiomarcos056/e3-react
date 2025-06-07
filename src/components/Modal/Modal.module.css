@@ -1,0 +1,86 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: var(--primary);
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 10px 10px;
+
+  color: white;
+  text-align: center;
+  /* position: relative; */
+  min-width: 400px; 
+  /* max-width: 90%; */
+}
+
+.closeButton {
+  position: absolute;
+  /* right: 310px;
+  top: 40px; */
+  background-color: var(--primary);
+  padding: 5px 15px;
+  border: none;
+  font-size: 40px;
+  font-weight: bold;
+  border-radius: 100px;
+  cursor: pointer;
+  color: white;
+}
+
+.closeButton:hover{
+  color: var(--secundary);
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.butonPrimary{
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: var(--secundary);
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.butonPrimary:hover{
+  background: white;
+  color: var(--secundary);
+}
+
+.butonSecundary{
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--secundary);
+  background: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.butonSecundary:hover{
+  background: var(--secundary);
+  color: white;
+}

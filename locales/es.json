@@ -1,0 +1,11 @@
+{
+    "options": "Opciones",
+    "canvas_dimension": "Dimensión del Lienzo",
+    "width": "Ancho",
+    "height": "Altura",
+    "on": "Encendido",
+    "off": "Apagado",
+    "language": "Lenguaje",
+    "sound_feedback": "Feedback Sonoro",
+    "advanced_mode": "Modo Avanzado"
+}

@@ -1,0 +1,70 @@
+.formDimension{
+    display: flex;
+    gap: 8px;
+}
+
+.inputDimension{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    align-items: center;
+}
+
+.inputLabel{
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.inputParagrafo{
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    align-self: flex-end;
+    padding-bottom: 5px;
+}
+
+.inputButton{
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: var(--gray-300);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+    height: 30px;
+    align-self: end;
+}
+
+.containerLanguage{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 8px 0;
+    border-radius: 5px;
+}
+
+.labelFlag{
+    cursor: pointer;
+    display: flex;
+}
+
+.radioFlag{
+    display: none;
+}
+
+.imgFlag{
+    border-radius: 5px;
+    border: 2px solid transparent;
+}
+
+.selected{
+    border: 3px solid var(--secundary);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

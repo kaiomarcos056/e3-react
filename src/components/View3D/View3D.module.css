@@ -1,0 +1,47 @@
+.card{
+    position: absolute;
+    top: 5%;
+    right: 10%;
+
+    width: 64px;
+    height: 64px;
+    background-color: var(--secundary);
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* padding-bottom: 3px; */
+
+    cursor: pointer;
+
+    transition: transform 0.3s ease;
+
+    z-index: 200;
+}
+
+.card:hover {
+    cursor: pointer;
+    background-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.icone{
+    width: 45px;
+    position: relative;
+    /* margin: 0 auto; */
+}
+
+.iconee{
+   color: white;
+   font-size: 40px;
+   margin-left: 5px;
+}
+
+.container{
+    width: 1000px;
+    height: 600px;
+    background-color: gray;
+    margin: 0px;
+}

@@ -1,0 +1,22 @@
+.historyButton{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+
+    width: 64px;
+    height: 64px;
+    background-color: var(--secundary);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.historyButton:hover{
+    background-color: var(--primary);
+}
