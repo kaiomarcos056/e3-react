@@ -1,6 +1,11 @@
 import styles from './Topbar.module.css';
 
+import { useTranslation } from 'react-i18next';
+
 export function Topbar({ children , icone, titulo , estilo = {}, isActive, onToggle, margin = 0 }) {
+
+    const {t} = useTranslation();
+
     return (
         <div 
             className={styles.sidebarContainer} 
@@ -21,7 +26,7 @@ export function Topbar({ children , icone, titulo , estilo = {}, isActive, onTog
                             {children}
                         </div>
                         <div className={styles.sidebarHeader}>
-                            <span>{titulo}</span>
+                            <span>{t(`${titulo}`)}</span>
                         </div>
                     </>
                 )}

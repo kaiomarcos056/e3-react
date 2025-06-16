@@ -24,7 +24,7 @@ export function TileMapProvider({ children }) {
         spriteSheetPath: '',
         layers: [
             { id: 'floor', name: 'Pisos', visible: true, sprites: [] },
-            { id: 'walls', name: 'Paredes', visible: true, sprites: [] },
+            { id: 'wall', name: 'Paredes', visible: true, sprites: [] },
             { id: 'door', name: 'Portas e Janelas', visible: true, sprites: [] },
             { id: 'furniture', name: 'Móveis', visible: true, sprites: [] },
             { id: 'utensils', name: 'Utensílios', visible: true, sprites: [] }

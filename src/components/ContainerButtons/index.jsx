@@ -11,24 +11,28 @@ import { FaChevronRight, FaChevronLeft  } from "react-icons/fa";
 
 import { useTileMap } from '../../contexts/TileMapContext';
 import { spritesMap } from '../../SpritesMap';
+import { useSpeech } from '../../hook/useSpeech';
+import { useTranslation } from 'react-i18next';
 
 
 const icons = [
-    { id: 1, name: 'lamp', icon: <LuLampFloor /> },
+    { id: 1, name: 'floor', icon: <LuLampFloor /> },
     { id: 2, name: 'wall', icon: <LuBrickWall /> },
     { id: 3, name: 'door', icon: <LuDoorOpen /> },
-    { id: 4, name: 'table', icon: <MdTableRestaurant /> },
-    { id: 5, name: 'fridge', icon: <CgSmartHomeRefrigerator /> },
-    { id: 6, name: 'guitar', icon: <LuGuitar /> },
+    { id: 4, name: 'furniture', icon: <MdTableRestaurant /> },
+    { id: 5, name: 'appliances', icon: <CgSmartHomeRefrigerator /> },
+    { id: 6, name: 'utensils', icon: <LuGuitar /> },
     { id: 7, name: 'hand', icon: <IoHandRightOutline /> },
     { id: 8, name: 'toy', icon: <TbManFilled /> },
 ];
 
-export function ContainerButtons() {
+export function ContainerButtons({ activeCard, setActiveCard }) {
+
+    const { speak } = useSpeech();
+    const {t} = useTranslation();
 
     const { selectedSprite, setSelectedSprite } = useTileMap();
 
-    const [activeCard, setActiveCard] = useState(null);
     const [viewAllSprites, setViewAllSprites] = useState(false);
 
     const containerRef = useRef(null);
@@ -74,14 +78,17 @@ export function ContainerButtons() {
 
                         <div className={styles.HeaderBar}>
                             <div className={styles.headerTitle}>
-                                <h1 key={s.id} className={styles.tiltleCategory}> {s.name} </h1>
+                                {/* <h1 key={s.id} className={styles.tiltleCategory}> {s.name} </h1> */}
+                                <h1 key={s.id} className={styles.tiltleCategory}> {t(s.category)} </h1>
                                 <div className={styles.titleFeedback}>
                                     <HiSpeakerWave className={styles.feedbackicon}/>
-                                    <h4 className={styles.feedbacktitle}>FEEDBACK COM O SOM DO TILE AO CLICAR</h4>
+                                    {/* <h4 className={styles.feedbacktitle}>FEEDBACK COM O SOM DO TILE AO CLICAR</h4> */}
+                                    <h4 className={styles.feedbacktitle}>{t("feedback_tile")}</h4>
                                 </div>
                             </div>
                             <h3 className={styles.viewAll} onClick={() => setViewAllSprites(prev => !prev)}>
-                                {viewAllSprites ? 'Ocultar' : 'Mostrar tudo'}
+                                {/* {viewAllSprites ? 'Ocultar' : 'Mostrar tudo'} */}
+                                {viewAllSprites ? t("hide") : t("show_all")}
                             </h3>
                         </div>
 
@@ -94,12 +101,13 @@ export function ContainerButtons() {
                                 {s?.sprites?.map((s, i) => (
                                     <div 
                                         className={`${styles.cardSprite} ${selectedSprite.name === s.name ? styles.cardSpriteActive : styles.cardSpriteInactive}`}
-                                        onMouseMove={(e) => handleMouseMove(e, s.name)}
+                                        onMouseMove={(e) => handleMouseMove(e, s.translate)}
                                         onMouseLeave={handleMouseLeave}
                                         onClick={() => {
-                                            const audio = new Audio(s.soundPath);
-                                            audio.volume = 0.1; // VALOR ENTRE 0.0 (MUDO) e 1.0 (VOLUME MÁXIMO)
-                                            audio.play();
+                                            //const audio = new Audio(s.soundPath);
+                                            //audio.volume = 0.1; // VALOR ENTRE 0.0 (MUDO) e 1.0 (VOLUME MÁXIMO)
+                                            //audio.play();
+                                            speak(t(`${s.translate}`));
                                             setSelectedSprite({ ...s, category: spritesMap[activeCard - 1]?.category });
                                         }}
                                         style={ { cursor: 'pointer', } }
@@ -124,7 +132,7 @@ export function ContainerButtons() {
             ))}
 
             <div className={styles.content}>
-                {icons.map(({ id, icon }) => (
+                {icons.map(({ id, name, icon }) => (
                     <div
                         key={id}
                         className={
@@ -133,7 +141,10 @@ export function ContainerButtons() {
                             ${activeCard === null ? '' : activeCard === id ? styles.active : styles.inactive}
                             `
                         }
-                        onClick={() => setActiveCard(prev => prev === id ? null : id)}
+                        onClick={() => {
+                            speak(t(`${name}`));
+                            setActiveCard(prev => prev === id ? null : id)
+                        }}
                     >
                         {icon}
                     </div>
@@ -146,7 +157,8 @@ export function ContainerButtons() {
                 className={styles.tooltipFloating}
                 style={{ top: tooltip.y+10, left: tooltip.x+10 }}
             >
-                {tooltip.text}
+                {/* {tooltip.text} */}
+                {t(tooltip.text)}
             </div>
         )}
         </>

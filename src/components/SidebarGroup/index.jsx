@@ -9,9 +9,9 @@ import { useState } from 'react';
 
 export function SidebarGroup(){
     const banners = [
-        { id: 1, img: "controles.jpg", titulo: "Controles" },
-        { id: 2, img: "tutoriais.jpg", titulo: "Tutoriais" },
-        { id: 3, img: "sobre.jpg", titulo: "Sobre" },
+        { id: 1, img: "controles.jpg", titulo: "controls" },
+        { id: 2, img: "tutoriais.jpg", titulo: "tutorials" },
+        { id: 3, img: "sobre.jpg", titulo: "about" },
     ];
 
     const [margin, setMargin] = useState({atributos: 0 , ajuda: 0 , exibir: 0 })
@@ -49,7 +49,7 @@ export function SidebarGroup(){
     return(
         <div>
             <Topbar 
-                titulo="Atributos" 
+                titulo="attributes"
                 icone={<FaSlidersH/>} 
                 estilo={{ bottom: '210px' }}
                 isActive={activeSidebar === 'atributos'}
@@ -60,7 +60,7 @@ export function SidebarGroup(){
             </Topbar>
 
             <Topbar 
-                titulo="Ajuda" 
+                titulo="help" 
                 icone={<FaQuestion/>} 
                 estilo={{ bottom: '130px' }}
                 isActive={activeSidebar === 'ajuda'}
@@ -75,7 +75,7 @@ export function SidebarGroup(){
             </Topbar>
 
             <Topbar 
-                titulo="Exibir" 
+                titulo="show" 
                 icone={<FaEye/>} 
                 estilo={{ bottom: '50px' }}
                 isActive={activeSidebar === 'exibir'}

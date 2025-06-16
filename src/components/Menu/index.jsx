@@ -1,5 +1,7 @@
 import styles from './Menu.module.css'
 
+import {useTranslation} from 'react-i18next';
+
 import { FaPlus } from "react-icons/fa6";
 import { IoMdSave } from "react-icons/io";
 import { FaFolderOpen } from "react-icons/fa";
@@ -12,7 +14,9 @@ export function Menu(){
 
     const { tilemap, setTilemap, setSelectedSprite, setSelectedLayerSprite, setHistory, history } = useTileMap();
 
-    const [isModalOpen, setModalOpen] = useState(false);
+    const {t} = useTranslation();
+
+    //const [isModalOpen, setModalOpen] = useState(false);
 
     const reset = () => {
         setSelectedSprite({})
@@ -104,7 +108,7 @@ export function Menu(){
                 onConfirm={saveNew}
                 onCancel={cancelNew}
             >
-                <h2>Deseja salvar o projeto em andamento?</h2>
+                <h2>{t("save_message")}</h2>
             </Modal>
 
             <Modal 
@@ -112,23 +116,23 @@ export function Menu(){
                 onConfirm={saveJSON}
                 onCancel={cancel}
             >
-                <h2>Deseja salvar o projeto em andamento?</h2>
+                <h2>{t("save_message")}</h2>
             </Modal>
 
             <div className={styles.menuItem} onClick={openModalNew}>
                 <FaPlus className={styles.menuIcone} />
-                <h3>Novo</h3>
+                <h3>{t("new")}</h3>
             </div>
 
             <div className={styles.menuItem} onClick={openModalSave}>
                 <IoMdSave className={styles.menuIcone} />
-                <h3>Salvar</h3>
+                <h3>{t("save")}</h3>
             </div>
 
             <div className={styles.menuItem} >
                 <label htmlFor="tile" style={ { display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' } }>
                     <FaFolderOpen className={styles.menuIcone} />
-                    <h3>Abrir</h3>
+                    <h3>{t("open")}</h3>
                 </label>
                 
                 <input type="file" accept=".json" id="tile" ref={fileInputRef} onChange={handleFileChange} style={{ display: "none" }}/>
