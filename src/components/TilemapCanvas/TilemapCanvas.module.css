@@ -1,0 +1,29 @@
+.container{
+    position: relative;
+    width: 100%;
+    height: 100%
+}
+
+.canvas{
+    width: 100vw;
+    height: 100vh;
+    image-rendering: pixelated;
+    display: block;
+}
+
+.rotateButton{
+    font-size: 16px;
+    border: none;
+    background-color: var(--secundary);
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.rotateButton:hover{
+    background-color: var(--primary);
+}

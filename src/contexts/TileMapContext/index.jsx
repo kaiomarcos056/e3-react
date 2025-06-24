@@ -12,14 +12,15 @@ export function TileMapProvider({ children }) {
     });
 
     const [selectedSprite, setSelectedSprite] = useState({})
-
-    const [selectedLayerSprite, setSelectedLayerSprite] = useState({x: -1, y: -1})
-
+    const [selectedLayerSprite, setSelectedLayerSprite] = useState(null)
     const [history, setHistory] = useState([])
+    const [settingsOpen, setSettingsOpen] = useState(false)
+    const [sidebarGroupOpen, setSidebarGroupOpen] = useState(false)
+    const [hoverCell, setHoverCell] = useState(null)
 
     const [tilemap, setTilemap] = useState({
-        width: 10,
-        height: 10,
+        width: 5,
+        height: 5,
         tileSize: 32,
         spriteSheetPath: '',
         layers: [
@@ -27,7 +28,10 @@ export function TileMapProvider({ children }) {
             { id: 'wall', name: 'Paredes', visible: true, sprites: [] },
             { id: 'door', name: 'Portas e Janelas', visible: true, sprites: [] },
             { id: 'furniture', name: 'Móveis', visible: true, sprites: [] },
-            { id: 'utensils', name: 'Utensílios', visible: true, sprites: [] }
+            { id: 'utensils', name: 'Utensílios', visible: true, sprites: [] },
+            { id: 'appliances', name: 'Eletrodomésticos', visible: true, sprites: [] },
+            { id: 'interactive', name: 'Elementos Interativos', visible: true, sprites: [] },
+            { id: 'person', name: 'Pessoa', visible: true, sprites: [] },
         ],
     });
 
@@ -39,6 +43,9 @@ export function TileMapProvider({ children }) {
                 stageSize, setStageSize,
                 selectedSprite, setSelectedSprite, 
                 selectedLayerSprite, setSelectedLayerSprite,
+                settingsOpen, setSettingsOpen,
+                sidebarGroupOpen, setSidebarGroupOpen,
+                hoverCell, setHoverCell,
                 history, setHistory,
                 tilemap, setTilemap
             }

@@ -16,8 +16,13 @@ export function History(){
     }
 
     return(
-        <div className={styles.historyButton} onClick={handleUndo}>
+        <button 
+            className={styles.historyButton} 
+            onClick={handleUndo}
+            aria-label="desfazer"
+            tabIndex={0}
+        >
             <FaHistory />
-        </div>
+        </button>
     )
 }

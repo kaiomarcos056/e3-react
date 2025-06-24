@@ -6,6 +6,8 @@ import { ViewLayers } from "../ViewLayers";
 import { FaEye, FaQuestion, FaSlidersH } from 'react-icons/fa';
 
 import { useState } from 'react';
+import { useTileMap } from "../../contexts/TileMapContext";
+import { useEffect } from 'react';
 
 export function SidebarGroup(){
     const banners = [
@@ -14,36 +16,51 @@ export function SidebarGroup(){
         { id: 3, img: "sobre.jpg", titulo: "about" },
     ];
 
-    const [margin, setMargin] = useState({atributos: 0 , ajuda: 0 , exibir: 0 })
+    const [margin, setMargin] = useState({atributos: 0, ajuda: 0, exibir: 0})
 
-    const [activeSidebar, setActiveSidebar] = useState(null);
+    const { sidebarGroupOpen, setSidebarGroupOpen, setSettingsOpen } = useTileMap();
     const handleToggle = (id) => {
-        if (activeSidebar === id) {
-            setActiveSidebar(null);
-            updateMargins(null);
+        if (sidebarGroupOpen === id) {
+            setSidebarGroupOpen(null);
+            //updateMargins(null);
         } 
         else {
-            setActiveSidebar(id);
-            updateMargins(id);
+            setSidebarGroupOpen(id);
+            //updateMargins(id);
         }
+        setSettingsOpen(false);
     };
 
-    function updateMargins(id) {
+    // function updateMargins(id) {
+    //     setMargin(prev => {
+    //         if (id === 'exibir') {
+    //             return { atributos: 250, ajuda: 250, exibir: 0 };
+    //         } 
+    //         else if (id === 'ajuda') {
+    //             return { atributos: 250, ajuda: 0, exibir: 0 };
+    //         } 
+    //         else if (id === 'atributos') {
+    //             return { atributos: 0, ajuda: 0, exibir: 0 };
+    //         } 
+    //         else {
+    //             return { atributos: 0, ajuda: 0, exibir: 0 };
+    //         }
+    //     });
+    // }
+
+    useEffect(() => {
         setMargin(prev => {
-            if (id === 'exibir') {
+            if (sidebarGroupOpen === 'exibir') {
                 return { atributos: 250, ajuda: 250, exibir: 0 };
-            } 
-            else if (id === 'ajuda') {
+            } else if (sidebarGroupOpen === 'ajuda') {
                 return { atributos: 250, ajuda: 0, exibir: 0 };
-            } 
-            else if (id === 'atributos') {
+            } else if (sidebarGroupOpen === 'atributos') {
                 return { atributos: 0, ajuda: 0, exibir: 0 };
-            } 
-            else {
+            } else {
                 return { atributos: 0, ajuda: 0, exibir: 0 };
             }
         });
-    }
+    }, [sidebarGroupOpen]);
 
 
     return(
@@ -52,7 +69,7 @@ export function SidebarGroup(){
                 titulo="attributes"
                 icone={<FaSlidersH/>} 
                 estilo={{ bottom: '210px' }}
-                isActive={activeSidebar === 'atributos'}
+                isActive={sidebarGroupOpen === 'atributos'}
                 onToggle={() => handleToggle('atributos')}
                 margin={margin.atributos}
             >
@@ -63,7 +80,7 @@ export function SidebarGroup(){
                 titulo="help" 
                 icone={<FaQuestion/>} 
                 estilo={{ bottom: '130px' }}
-                isActive={activeSidebar === 'ajuda'}
+                isActive={sidebarGroupOpen === 'ajuda'}
                 onToggle={() => handleToggle('ajuda')}
                 margin={margin.ajuda}
             >
@@ -78,7 +95,7 @@ export function SidebarGroup(){
                 titulo="show" 
                 icone={<FaEye/>} 
                 estilo={{ bottom: '50px' }}
-                isActive={activeSidebar === 'exibir'}
+                isActive={sidebarGroupOpen === 'exibir'}
                 onToggle={() => handleToggle('exibir')}
                 margin={margin.exibir}
             >

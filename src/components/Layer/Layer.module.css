@@ -6,15 +6,11 @@
     padding: 8px 6px;
     list-style: none;
     border-end-end-radius: 16px;
-
-    /* max-height: 500px; */
-    max-height: 330px;
+    width: 350px;
+    max-height: calc(100vh - 310px);
     overflow: auto;
-
     scrollbar-width: thin;
     scrollbar-color: var(--gray-500) var(--gray-100);
-
-    width: 350px;
 }
 
 .layerList::-webkit-scrollbar {
@@ -60,8 +56,18 @@
     cursor: pointer;
 }
 
+.layerName:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+}
+
 .sublayerList{
     list-style: none;
+}
+
+.sublayerList:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .layerItem:hover{
@@ -78,13 +84,15 @@
     cursor: pointer;
     background-color: transparent;
     border-left: 1px solid black;
-}
-
-.layerBotao{
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
+}
+
+.layerBotao:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .subLayer{
@@ -97,16 +105,21 @@
     font-weight: 500;
     cursor: pointer;
     display: flex;
-    
     justify-content: space-between;
     align-items: center;
     margin-top: 5px;
 }
+
 .subLayerName{
     flex: 1;
     display: flex;
     justify-content: space-between;
     padding-right: 10px;
+}
+
+.subLayerName:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .subLayerButton{
@@ -117,6 +130,11 @@
     background: transparent;
     border-left: 1px solid black;
     cursor: pointer;
+}
+
+.subLayerButton:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .iconSubLayer{
@@ -156,9 +174,19 @@
     padding: 0 8px;
 }
 
+.subLayerTileName:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+}
+
 .subLayerTile:hover{
     background-color: var(--primary-light);
     
+}
+
+.subLayerTile:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .subLayerTileButtons{
@@ -169,4 +197,9 @@
     background: transparent;
     border-left: 1px solid black;
     cursor: pointer;
+}
+
+.subLayerTileButtons:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }

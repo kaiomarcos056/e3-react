@@ -6,6 +6,7 @@
     bottom: 0;
     transform: translateX(-50%);
     margin-bottom: 48px;
+    /* z-index: 1; */
 }
 
 .content{
@@ -24,6 +25,12 @@
     align-items: center;
     font-size: 32px;
     color: white;
+    border: none;
+}
+
+.card:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .active, .card:hover {
@@ -125,6 +132,12 @@
     justify-content: center;
     padding: 10px;
     border-radius: 10px;
+    border: none;
+}
+
+.cardSprite:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .cardSpriteActive{

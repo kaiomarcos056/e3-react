@@ -1,0 +1,27 @@
+.gridOverlay {
+    /* border: 1px solid red; */
+    position: absolute;
+    top: 0;
+    /* left: -1000px; */
+    pointer-events: none; /* Não interfere nos cliques do canvas */
+    /* border: 1px solid red; */
+    /* margin: 0 auto; */
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 32px;
+    height: 32px;
+    outline: none;
+    pointer-events: auto;
+}
+
+.cell:focus {
+    /* Azul vibrante */
+    /* border: 2px solid #4A90E2;  */
+    /* box-shadow: 0 0 4px 2px rgba(74, 144, 226, 0.5); */
+    /* z-index: 10; */
+}

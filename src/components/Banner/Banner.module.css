@@ -10,6 +10,11 @@
     border: 2px solid white;
 }
 
+.banner:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+}
+
 .banner::after {
     content: '';
     position: absolute;

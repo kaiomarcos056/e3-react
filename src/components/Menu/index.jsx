@@ -100,9 +100,19 @@ export function Menu(){
         reader.readAsText(file);
     }
 
+    const handleKey = (e, action) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            action();
+        }
+    };
 
     return(
-        <div className={styles.menuContainer} >
+        <div 
+            className={styles.menuContainer} 
+            role="menubar" 
+            aria-label={t("menu_main")}
+        >
             <Modal 
                 isOpen={isModalNew} 
                 onConfirm={saveNew}
@@ -119,23 +129,50 @@ export function Menu(){
                 <h2>{t("save_message")}</h2>
             </Modal>
 
-            <div className={styles.menuItem} onClick={openModalNew}>
+            <div 
+                className={styles.menuItem} 
+                onClick={openModalNew}
+                onKeyDown={(e) => handleKey(e, openModalNew)}
+                role="menuitem"
+                tabIndex={0}
+                aria-label={t("new")}
+            >
                 <FaPlus className={styles.menuIcone} />
                 <h3>{t("new")}</h3>
             </div>
 
-            <div className={styles.menuItem} onClick={openModalSave}>
+            <div 
+                className={styles.menuItem} 
+                onClick={openModalSave}
+                onKeyDown={(e) => handleKey(e, openModalSave)}
+                role="menuitem"
+                tabIndex={0}
+                aria-label={t("save")}
+            >
                 <IoMdSave className={styles.menuIcone} />
                 <h3>{t("save")}</h3>
             </div>
 
-            <div className={styles.menuItem} >
+            <div 
+                className={styles.menuItem} 
+                tabIndex={0}
+                aria-label={t("open")}
+            >
                 <label htmlFor="tile" style={ { display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' } }>
                     <FaFolderOpen className={styles.menuIcone} />
                     <h3>{t("open")}</h3>
                 </label>
                 
-                <input type="file" accept=".json" id="tile" ref={fileInputRef} onChange={handleFileChange} style={{ display: "none" }}/>
+                <input 
+                    type="file" 
+                    accept=".json" 
+                    id="tile" 
+                    ref={fileInputRef} 
+                    onChange={handleFileChange} 
+                    style={{ display: "none" }}
+                    aria-hidden="true"
+                    tabIndex={-1}
+                />
             </div>
         </div>
     )

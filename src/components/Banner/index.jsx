@@ -15,6 +15,8 @@ export function Banner({img,titulo}){
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
             }}
+            tabIndex={0}
+            aria-label={t(`${titulo}`)}
         >
             <div className={styles.bannerContent}>
                 <h4>{t(`${titulo}`)}</h4>

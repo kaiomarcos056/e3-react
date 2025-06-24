@@ -2,29 +2,28 @@
     position: absolute;
     top: 5%;
     right: 10%;
-
     width: 64px;
     height: 64px;
     background-color: var(--secundary);
     border-radius: 15px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* padding-bottom: 3px; */
-
     cursor: pointer;
-
     transition: transform 0.3s ease;
-
     z-index: 200;
+    border: none;
 }
 
 .card:hover {
     cursor: pointer;
     background-color: var(--primary);
     transform: scale(1.05);
+}
+
+.card:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
 }
 
 .icone{

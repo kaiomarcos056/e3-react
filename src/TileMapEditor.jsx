@@ -8,6 +8,7 @@ import { useMemo } from 'react';
 
 import { useTileMap } from './contexts/TileMapContext';
 import { spritesMap } from './SpritesMap';
+import { AccessibleGridOverlay } from './components/AccessibleGridOverlay';
 
 const GRID_SIZE = 32;
 
@@ -62,9 +63,6 @@ function TileMapEditor() {
       const gridY = Math.floor(y / GRID_SIZE);
 
       const { cols = 1, rows = 1 } = selectedSprite.size || {};
-
-      console.log(`X = ${gridX} - Y = ${gridY}`)
-      console.log(`X = ${selectedLayerSprite.x} - Y = ${selectedLayerSprite.y}`)
 
       if(gridX != selectedLayerSprite.x || gridY != selectedLayerSprite.y) setSelectedLayerSprite({})
 
@@ -135,6 +133,7 @@ function TileMapEditor() {
           tileType: selectedSprite.id,
           spriteSheetPath: selectedSprite.path,
           name: selectedSprite.name,
+          translate: selectedSprite.translate,
           visible: true,
           size: { cols, rows }
         });
@@ -502,6 +501,17 @@ const handleImage = (layer, tile) => {
           </Group>
         </Layer>    
       </Stage>
+
+      <AccessibleGridOverlay
+        rows={numRows}
+        cols={numCols}
+        cellSize={GRID_SIZE}
+        getTileInfo={(r, c) => tilemap.layers[0].sprites.find(s => s.x === c && s.y === r)}
+        setTile={(r, c) => {
+          // lógica para modificar o tile no mapa
+        }}
+      />
+
     </div>
   );
 }

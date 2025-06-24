@@ -6,9 +6,9 @@ export function Heading(){
 
     return(
         <div style={ {position: 'absolute', width: '100%', textAlign: 'center'} }>
-            <h1>{JSON.stringify(selectedSprite)}</h1>
+            {/* <h1>{JSON.stringify(selectedSprite)}</h1> */}
             <br />
-            {/* <h1>{JSON.stringify(selectedLayerSprite)}</h1> */}
+            <h1>{JSON.stringify(selectedLayerSprite)}</h1>
         </div>
     )
 }

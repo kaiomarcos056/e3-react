@@ -36,6 +36,7 @@ export function ViewLayers(){
                             type="checkbox"
                             checked={layer.sprites.some(sprite => sprite.visible)}
                             onChange={e => toggleLayerSpritesVisibility(layer.id, e.target.checked)}
+                            tabIndex={0}
                         />
                         {layer.name}
                     </label>

@@ -39,6 +39,7 @@ import { useCallback } from 'react';
 
 import {useTranslation} from 'react-i18next';
 import { useSpeech } from './hook/useSpeech';
+import { TilemapCanvas } from './components/TilemapCanvas';
 
 export function App() {
     const { speak } = useSpeech();
@@ -55,59 +56,98 @@ export function App() {
         PORTAS: 'e',
         MOVEIS: 'r',
         ELETRODOMESTICOS: 't',
-        UTENSILIOS: 'y'
+        UTENSILIOS: 'y',
+        INTERATIVOS: 'u',
+        PERSON: 'i'
     };
 
     const handlers = {
         PISO: () => {
-            speak(t("floor"));
+            //speak(t("floor"));
             setActiveCard(prev => prev === 1 ? null : 1);
         },
         PAREDE: () => {
-            speak(t("wall"));
+            //speak(t("wall"));
             setActiveCard(prev => prev === 2 ? null : 2);
         },
         PORTAS: () => {
-            speak(t("door"));
+            //speak(t("door"));
             setActiveCard(prev => prev === 3 ? null : 3);
         },
         MOVEIS: () => {
-            speak(t("furniture"));
+            //speak(t("furniture"));
             setActiveCard(prev => prev === 4 ? null : 4);
         },
         ELETRODOMESTICOS: () => {
+            //speak(t("appliances"));
             setActiveCard(prev => prev === 5 ? null : 5);
         },
         UTENSILIOS: () => {
+            //speak(t("utensils"));
             setActiveCard(prev => prev === 6 ? null : 6);
+        },
+        INTERATIVOS: () => {
+            //speak(t("interactive"));
+            setActiveCard(prev => prev === 7 ? null : 7);
+        },
+        PERSON: () => {
+            //speak(t("person"));
+            setActiveCard(prev => prev === 8 ? null : 8);
         },
     };
 
-    
+
+    // CONTROLE DOS SIDEBAR
+    const [marginCardSideBar, setMarginCardSideBar] = useState(0);
+    const [activeSidebar, setActiveSidebar] = useState(null);
+    const handleActiveSideBar = (id) => {
+        setMarginCardSideBar(id === 'menu' && id !== activeSidebar ? 130 : 0);
+        setActiveSidebar(activeSidebar === id ? null : id)
+    }
 
     return (
+        // <View3D  />
+
         <TileMapProvider>
             <HotKeys keyMap={keyMap} handlers={handlers}>
             {/* <Heading/> */}
             {/* <Layer></Layer> */}
-            <History/>
+            {/* <TileMapEditor /> */}
+
+            <TilemapCanvas/>
 
             <View3D/>
-            <Settings/>
 
-            <Sidebar titulo="Menu" estilo={{ top: '5%' }} icon={<IoMenu />}>
+            <Sidebar 
+                titulo="Menu" 
+                estilo={{ top: '35px' }} 
+                icon={<IoMenu />}
+                isOpen={activeSidebar === 'menu'}
+                onToggle={() => handleActiveSideBar('menu')}
+            >
                 <Menu/>
             </Sidebar>
 
-            <Sidebar titulo="Elementos" estilo={{ top: '35%' }} icon={<LuClipboardList />}>
+            <Sidebar 
+                titulo="Elementos" 
+                estilo={{ top: '115px' }} 
+                icon={<LuClipboardList />}
+                isOpen={activeSidebar === 'elementos'}
+                onToggle={() => handleActiveSideBar('elementos')}
+                styleCard={{marginLeft: marginCardSideBar+'px'}}
+            >
                 <Layer/>
             </Sidebar>
 
-            <SidebarGroup/>
+            <Settings/>
 
-            <TileMapEditor />
+            <History/>
 
             <ContainerButtons activeCard={activeCard} setActiveCard={setActiveCard} />
+
+            <SidebarGroup/>
+
+            
             </HotKeys>
         </TileMapProvider>
     );

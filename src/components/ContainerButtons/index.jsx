@@ -22,8 +22,8 @@ const icons = [
     { id: 4, name: 'furniture', icon: <MdTableRestaurant /> },
     { id: 5, name: 'appliances', icon: <CgSmartHomeRefrigerator /> },
     { id: 6, name: 'utensils', icon: <LuGuitar /> },
-    { id: 7, name: 'hand', icon: <IoHandRightOutline /> },
-    { id: 8, name: 'toy', icon: <TbManFilled /> },
+    { id: 7, name: 'interactive', icon: <IoHandRightOutline /> },
+    { id: 8, name: 'person', icon: <TbManFilled /> },
 ];
 
 export function ContainerButtons({ activeCard, setActiveCard }) {
@@ -54,7 +54,7 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
     const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, text: '' });
 
     const handleMouseMove = (e, name) => {
-        console.log(e.clientX)
+        //console.log(e.clientX)
         setTooltip({
             visible: true,
             x: e.clientX,
@@ -66,6 +66,13 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
         setTooltip({ visible: false, x: 0, y: 0, text: '' });
     };
 
+    const firstSpriteRef = useRef(null);
+
+    useEffect(() => {
+        if (activeCard && firstSpriteRef.current) {
+            firstSpriteRef.current.focus();
+        }
+    }, [activeCard]);
 
     return (
         <>
@@ -78,16 +85,13 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
 
                         <div className={styles.HeaderBar}>
                             <div className={styles.headerTitle}>
-                                {/* <h1 key={s.id} className={styles.tiltleCategory}> {s.name} </h1> */}
                                 <h1 key={s.id} className={styles.tiltleCategory}> {t(s.category)} </h1>
                                 <div className={styles.titleFeedback}>
                                     <HiSpeakerWave className={styles.feedbackicon}/>
-                                    {/* <h4 className={styles.feedbacktitle}>FEEDBACK COM O SOM DO TILE AO CLICAR</h4> */}
                                     <h4 className={styles.feedbacktitle}>{t("feedback_tile")}</h4>
                                 </div>
                             </div>
                             <h3 className={styles.viewAll} onClick={() => setViewAllSprites(prev => !prev)}>
-                                {/* {viewAllSprites ? 'Ocultar' : 'Mostrar tudo'} */}
                                 {viewAllSprites ? t("hide") : t("show_all")}
                             </h3>
                         </div>
@@ -97,9 +101,15 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
                                 <FaChevronLeft />
                             </button>
 
-                            <div className={`${styles.containerSprites} ${styles.gradientBorder} ${activeCard ? styles.show : ''}`} style={ { flexWrap: viewAllSprites ? 'wrap' : 'nowrap' } } ref={scrollRef}>
+                            <div 
+                                className={`${styles.containerSprites} ${styles.gradientBorder} ${activeCard ? styles.show : ''}`} 
+                                style={ { flexWrap: viewAllSprites ? 'wrap' : 'nowrap' } } 
+                                ref={scrollRef}
+                                role='listbox'
+                                aria-label='sprites'
+                            >
                                 {s?.sprites?.map((s, i) => (
-                                    <div 
+                                    <button 
                                         className={`${styles.cardSprite} ${selectedSprite.name === s.name ? styles.cardSpriteActive : styles.cardSpriteInactive}`}
                                         onMouseMove={(e) => handleMouseMove(e, s.translate)}
                                         onMouseLeave={handleMouseLeave}
@@ -107,18 +117,18 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
                                             //const audio = new Audio(s.soundPath);
                                             //audio.volume = 0.1; // VALOR ENTRE 0.0 (MUDO) e 1.0 (VOLUME MÁXIMO)
                                             //audio.play();
-                                            speak(t(`${s.translate}`));
+                                            //speak(t(`${s.translate}`));
                                             setSelectedSprite({ ...s, category: spritesMap[activeCard - 1]?.category });
                                         }}
                                         style={ { cursor: 'pointer', } }
+                                        tabIndex={activeCard ? 0 : -1}
+                                        aria-label={t(`${s.translate}`)}
+                                        aria-selected={selectedSprite.name === s.name}
+                                        role="option"
+                                        ref={i === 0 ? firstSpriteRef : null}
                                     >
-                                        <img 
-                                            key={i} 
-                                            src={s.path} 
-                                            style={ { width: 32, height: 32 } }
-                                            // onClick={() => setSelectedSprite({...s, category: spritesMap[activeCard-1]?.category }) }
-                                        />
-                                    </div>
+                                        <img key={i} src={s.path} style={ { width: 32, height: 32, objectFit: 'contain' } } />
+                                    </button>
                                 ))}
                             </div>
                             
@@ -131,33 +141,35 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
                 : null
             ))}
 
-            <div className={styles.content}>
+            <div 
+                className={styles.content}
+                role='listbox' // É uma lista de opções selecionáveis.
+                aria-label='Categoria de sprites'
+            >
                 {icons.map(({ id, name, icon }) => (
-                    <div
+                    <>
+                    {/* <button aria-label="Fechar modal">X</button> */}
+                    <button
                         key={id}
-                        className={
-                            `
-                            ${styles.card} 
-                            ${activeCard === null ? '' : activeCard === id ? styles.active : styles.inactive}
-                            `
-                        }
+                        className={`${styles.card} ${activeCard === null ? '' : activeCard === id ? styles.active : styles.inactive}`}
                         onClick={() => {
-                            speak(t(`${name}`));
+                            //speak(t(`${name}`));
                             setActiveCard(prev => prev === id ? null : id)
                         }}
+                        aria-label={t(`${name}`)} // O que será lido (ex: "Salvar")
+                        aria-selected={activeCard === id} // Diz se o item está selecionado
+                        role="option" // Diz que esse botão é uma opção dentro de uma lista
+                        tabIndex={0}  // 0 -> Entra na ordem do `Tab` normalmente | -1 -> Não entra com `Tab`, mas pode receber foco via JS ex: modais | >0 -> Força uma ordem de navegação (desencorajado)
                     >
                         {icon}
-                    </div>
+                    </button>
+                    </>
                 ))}
             </div>
         </div>
 
         {tooltip.visible && (
-            <div
-                className={styles.tooltipFloating}
-                style={{ top: tooltip.y+10, left: tooltip.x+10 }}
-            >
-                {/* {tooltip.text} */}
+            <div className={styles.tooltipFloating} style={{ top: tooltip.y+10, left: tooltip.x+10 }} >
                 {t(tooltip.text)}
             </div>
         )}
