@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
 import styles from './ContainerButtons.module.css';
+
+import { useState, useRef, useEffect } from 'react';
 
 import { LuBrickWall, LuDoorOpen, LuGuitar, LuLampFloor } from "react-icons/lu";
 import { MdTableRestaurant } from "react-icons/md";
@@ -54,7 +55,6 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
     const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, text: '' });
 
     const handleMouseMove = (e, name) => {
-        //console.log(e.clientX)
         setTooltip({
             visible: true,
             x: e.clientX,
@@ -73,6 +73,14 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
             firstSpriteRef.current.focus();
         }
     }, [activeCard]);
+
+    const handleAudio = (path) =>  {
+
+        //const audio = new Audio(s.soundPath);
+        const audio = new Audio(path);
+        audio.volume = 0.5; // VALOR ENTRE 0.0 (MUDO) e 1.0 (VOLUME MÁXIMO)
+        audio.play();
+    }
 
     return (
         <>
@@ -118,6 +126,7 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
                                             //audio.volume = 0.1; // VALOR ENTRE 0.0 (MUDO) e 1.0 (VOLUME MÁXIMO)
                                             //audio.play();
                                             //speak(t(`${s.translate}`));
+                                            handleAudio(s.soundPath);
                                             setSelectedSprite({ ...s, category: spritesMap[activeCard - 1]?.category });
                                         }}
                                         style={ { cursor: 'pointer', } }
@@ -160,6 +169,8 @@ export function ContainerButtons({ activeCard, setActiveCard }) {
                         aria-selected={activeCard === id} // Diz se o item está selecionado
                         role="option" // Diz que esse botão é uma opção dentro de uma lista
                         tabIndex={0}  // 0 -> Entra na ordem do `Tab` normalmente | -1 -> Não entra com `Tab`, mas pode receber foco via JS ex: modais | >0 -> Força uma ordem de navegação (desencorajado)
+                        onMouseMove={(e) => handleMouseMove(e, name)}
+                        onMouseLeave={handleMouseLeave}
                     >
                         {icon}
                     </button>

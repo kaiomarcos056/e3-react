@@ -11,7 +11,7 @@
     align-items: center;
     cursor: pointer;
     transition: transform 0.3s ease;
-    z-index: 200;
+    z-index: 3;
     border: none;
 }
 
@@ -29,7 +29,6 @@
 .icone{
     width: 45px;
     position: relative;
-    /* margin: 0 auto; */
 }
 
 .iconee{

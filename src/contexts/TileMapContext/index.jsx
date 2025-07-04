@@ -25,13 +25,13 @@ export function TileMapProvider({ children }) {
         spriteSheetPath: '',
         layers: [
             { id: 'floor', name: 'Pisos', visible: true, sprites: [] },
-            { id: 'wall', name: 'Paredes', visible: true, sprites: [] },
-            { id: 'door', name: 'Portas e Janelas', visible: true, sprites: [] },
+            { id: 'walls', name: 'Paredes', visible: true, sprites: [] },
+            { id: 'door_and_windows', name: 'Portas e Janelas', visible: true, sprites: [] },
             { id: 'furniture', name: 'Móveis', visible: true, sprites: [] },
             { id: 'utensils', name: 'Utensílios', visible: true, sprites: [] },
-            { id: 'appliances', name: 'Eletrodomésticos', visible: true, sprites: [] },
-            { id: 'interactive', name: 'Elementos Interativos', visible: true, sprites: [] },
-            { id: 'person', name: 'Pessoa', visible: true, sprites: [] },
+            { id: 'eletronics', name: 'Eletrodomésticos', visible: true, sprites: [] },
+            { id: 'interactive_elements', name: 'Elementos Interativos', visible: true, sprites: [] },
+            { id: 'persons', name: 'Pessoa', visible: true, sprites: [] },
         ],
     });
 

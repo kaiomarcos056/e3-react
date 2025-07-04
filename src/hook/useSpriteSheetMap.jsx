@@ -7,9 +7,27 @@ export function useSpriteSheetMap(spritesMap) {
     // useEffect executa quando o componente monta ou quando 'spritesMap' muda
     useEffect(() => {
         // Extrai todos os caminhos de imagem do spritesMap em um array simples
-        const paths = spritesMap.flatMap(category =>
-            category.sprites.map(sprite => sprite.path)
+        //const paths = spritesMap.flatMap(category =>
+            //category.sprites.map(sprite => sprite.path)
+        //);
+          const todosOsPaths = spritesMap.flatMap(category =>
+            category.sprites.flatMap(sprite => {
+            // Começa com o path principal do sprite.
+            const paths = [sprite.path];
+            
+            // Verifica se o objeto 'rotations' existe.
+            // (Corrigi o nome de 'angle' para 'rotations' para bater com seus dados).
+            if (sprite.rotations) {
+                // Pega os paths de todas as rotações e os adiciona à nossa lista.
+                paths.push(...Object.values(sprite.rotations).map(rot => rot.path));
+            }
+
+            return paths;
+            })
         );
+        const paths = [...new Set(todosOsPaths)];
+
+        //console.log(paths)
 
         // Função assíncrona que carrega todas as imagens
         const loadImages = async () => {

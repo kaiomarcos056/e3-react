@@ -1,17 +1,37 @@
+import styles from './View3D.module.css';
+
+import { useTileMap } from '../../contexts/TileMapContext';
 import { useEffect, useRef, useState } from 'react';
+
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import styles from './View3D.module.css'; // ajuste o caminho conforme necessário
-import { Modal } from '../Modal'; // seu componente de modal
-import { LuAxis3D } from "react-icons/lu"; // ou qualquer ícone que você está usando
-import { useTileMap } from '../../contexts/TileMapContext';
+
+import { Modal } from '../Modal';
+import { LuAxis3D } from "react-icons/lu";
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { Tooltip } from '../Tooltip';
 
 export function View3D() {
   const [isModal3d, setModal3d] = useState(false);
   const mountRef = useRef(null);
 
   const {tilemap} = useTileMap();
+
+  const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, text: '' });
+
+  const handleMouseMove = (e, name) => {
+    setTooltip({
+        visible: true,
+        x: e.clientX,
+        y: e.clientY,
+        text: name
+    });
+  }
+
+  const handleMouseLeave = () => {
+    setTooltip({ visible: false, x: 0, y: 0, text: '' });
+  };
 
   useEffect(() => {
     if (!isModal3d || !mountRef.current) return;
@@ -214,14 +234,21 @@ export function View3D() {
       <Modal isOpen={isModal3d} buttons={false} onClose={() => setModal3d(false)} showButtonClose={true}>
         <div className={styles.container} ref={mountRef}></div>
       </Modal>
+
       <button 
         className={styles.card} 
         onClick={() => setModal3d(true)}
         aria-label="Pré-visualização 3D"
         aria-selected={isModal3d}
+        onMouseMove={(e) => handleMouseMove(e, "visualização 3d")}
+        onMouseLeave={handleMouseLeave}
       >
         <LuAxis3D className={styles.iconee} />
       </button>
+
+      {tooltip.visible && (
+        <Tooltip texto={tooltip.text} x={tooltip.x} y={tooltip.y}/>
+      )}
     </>
   );
 }

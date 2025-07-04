@@ -40,8 +40,22 @@ import { useCallback } from 'react';
 import {useTranslation} from 'react-i18next';
 import { useSpeech } from './hook/useSpeech';
 import { TilemapCanvas } from './components/TilemapCanvas';
+import { Tooltip } from './components/Tooltip';
+import { initializeTileData } from './utils/tileService';
 
 export function App() {
+    const [error, setError] = useState(null);
+
+    const [isInitialized, setIsInitialized] = useState(false);
+    
+    useEffect(() => {
+        initializeTileData()
+        // Se a inicialização for bem-sucedida, atualiza o estado 'isInitialized' para 'true'.
+        .then(() => setIsInitialized(true))
+        // Se ocorrer um erro, atualiza o estado de erro.
+        .catch(setError);
+    }, []);
+
     const { speak } = useSpeech();
 
     const {t} = useTranslation();
@@ -113,7 +127,7 @@ export function App() {
             {/* <Heading/> */}
             {/* <Layer></Layer> */}
             {/* <TileMapEditor /> */}
-
+            {/* <Tooltip/> */}
             <TilemapCanvas/>
 
             <View3D/>

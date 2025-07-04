@@ -8,13 +8,9 @@ import { CanvasDimensions } from '../CanvasDimensions';
 
 import {useTranslation} from 'react-i18next';
 import { useTileMap } from '../../contexts/TileMapContext';
+import { Tooltip } from '../Tooltip';
 
 export function Settings(){
-    // const [isOpen, setIsOpen] = useState(false);
-
-    // const toggleSettings = () => {
-    //     setIsOpen(!isOpen);
-    // };
 
     const {settingsOpen, setSettingsOpen, setSidebarGroupOpen} = useTileMap();
     const toggleSettings = () => {
@@ -23,6 +19,21 @@ export function Settings(){
     };
 
     const {t} = useTranslation();
+
+    const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, text: '' });
+
+    const handleMouseMove = (e, name) => {
+        setTooltip({
+            visible: true,
+            x: e.clientX,
+            y: e.clientY,
+            text: name
+        });
+    }
+
+    const handleMouseLeave = () => {
+        setTooltip({ visible: false, x: 0, y: 0, text: '' });
+    };
 
     return(
         <div className={`${styles.container}`}>
@@ -34,6 +45,8 @@ export function Settings(){
                 aria-selected={settingsOpen}
                 tabIndex={0}
                 role="option"
+                onMouseMove={(e) => handleMouseMove(e, "configurações")}
+                onMouseLeave={handleMouseLeave}
             >
                 <IoIosSettings />
             </button>
@@ -46,6 +59,10 @@ export function Settings(){
 
                 <CanvasDimensions/>
             </div>
+            )}
+
+            {tooltip.visible && (
+                <Tooltip texto={tooltip.text} x={tooltip.x} y={tooltip.y}/>
             )}
         </div>
     )

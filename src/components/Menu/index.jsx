@@ -9,6 +9,11 @@ import { useTileMap } from '../../contexts/TileMapContext';
 import { Modal } from '../Modal';
 
 import { useState, useRef } from 'react';
+import { adaptarAppJsonParaE3Map } from '../../utils/adaptador';
+import { converterJsonParaXml } from '../../utils/converterJsonParaXml';
+import { converterXmlParaJson } from '../../utils/converterXmlParaJson';
+import { converterJsonParaJson } from '../../utils/converterJsonParaJson';
+import { convertMap } from '../../utils/converter';
 
 export function Menu(){
 
@@ -54,7 +59,22 @@ export function Menu(){
     // SALVAR
     const [isModalSave, setModalSave] = useState(false);
     const openModalSave = () => {
-        setModalSave(true);
+    
+        // 1. ADAPTAR: Converte o JSON do seu editor para o formato E3Map.
+        const e3Map = adaptarAppJsonParaE3Map(tilemap);
+        console.log(JSON.stringify(e3Map));
+
+        const a = convertMap(e3Map);
+        //console.log(a);
+       // console.log(JSON.stringify(tilemap))
+
+        //setModalSave(true);
+
+        //const xml = converterJsonParaXml(tilemap);
+        //console.log(xml)
+
+
+
     }
     const saveJSON = () => {
         download();
@@ -83,22 +103,45 @@ export function Menu(){
 
     // CARREGAR
     const fileInputRef = useRef(null);
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+        const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
 
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            try {
-                const json = JSON.parse(event.target.result);
-                setTilemap(json);
-            }
-            catch (e) {
-                alert("Erro ao carregar o arquivo. Verifique o formato do JSON.");
-            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+
+                switch (fileExtension) {
+                    case "json":
+                        try {
+                            const jsonContent = JSON.parse(content);
+                            const retorno = converterJsonParaJson(jsonContent);
+                            setTilemap(retorno)
+                        } 
+                        catch (err) {
+                            console.error("Erro ao parsear JSON:", err);
+                        }
+                        break;
+
+                    case "xml":
+                        const retorno = converterXmlParaJson(content)
+
+                        setTilemap(retorno)
+                        
+                        break;
+
+                    default:
+                        console.log("Extensão não suportada");
+                        break;
+                }
+            };
+
+            reader.readAsText(file);
         }
-        reader.readAsText(file);
-    }
+        event.target.value = null;
+    };
 
     const handleKey = (e, action) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -165,7 +208,7 @@ export function Menu(){
                 
                 <input 
                     type="file" 
-                    accept=".json" 
+                    accept=".json, .xml"
                     id="tile" 
                     ref={fileInputRef} 
                     onChange={handleFileChange} 

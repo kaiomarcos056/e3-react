@@ -1,6 +1,8 @@
 import styles from './Topbar.module.css';
 
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { Tooltip } from '../Tooltip';
 
 export function Topbar({ 
     children, 
@@ -14,6 +16,21 @@ export function Topbar({
  }) {
 
     const {t} = useTranslation();
+
+    const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, text: '' });
+
+    const handleMouseMove = (e, name) => {
+        setTooltip({
+            visible: true,
+            x: e.clientX,
+            y: e.clientY,
+            text: t(name)
+        });
+    }
+
+    const handleMouseLeave = () => {
+        setTooltip({ visible: false, x: 0, y: 0, text: '' });
+    };
 
     return (
         <div 
@@ -30,6 +47,8 @@ export function Topbar({
                 aria-label={t(`${titulo}`)}
                 aria-selected={isActive}
                 role="option"
+                onMouseMove={(e) => handleMouseMove(e, titulo)}
+                onMouseLeave={handleMouseLeave}
             >
                 {icone}
             </button>
@@ -46,6 +65,10 @@ export function Topbar({
                     </>
                 )}
             </div>
+
+            {tooltip.visible && (
+                <Tooltip texto={tooltip.text} x={tooltip.x} y={tooltip.y}/>
+            )}
         </div>
     );
 }
