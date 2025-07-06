@@ -1,14 +1,17 @@
 import styles from './Menu.module.css'
 
-import {useTranslation} from 'react-i18next';
+import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useTileMap } from '../../contexts/TileMapContext';
 
 import { FaPlus } from "react-icons/fa6";
 import { IoMdSave } from "react-icons/io";
 import { FaFolderOpen } from "react-icons/fa";
-import { useTileMap } from '../../contexts/TileMapContext';
-import { Modal } from '../Modal';
+import { IoMenu } from 'react-icons/io5';
 
-import { useState, useRef } from 'react';
+import { Modal } from '../Modal';
+import { Sidebar } from '../Sidebar';
+
 import { adaptarAppJsonParaE3Map } from '../../utils/adaptador';
 import { converterJsonParaXml } from '../../utils/converterJsonParaXml';
 import { converterXmlParaJson } from '../../utils/converterXmlParaJson';
@@ -16,94 +19,85 @@ import { converterJsonParaJson } from '../../utils/converterJsonParaJson';
 import { convertMap } from '../../utils/converter';
 
 export function Menu(){
-
-    const { tilemap, setTilemap, setSelectedSprite, setSelectedLayerSprite, setHistory, history } = useTileMap();
-
     const {t} = useTranslation();
 
-    //const [isModalOpen, setModalOpen] = useState(false);
+    const download = (fileFormat, fileString) => {
 
-    const reset = () => {
-        setSelectedSprite({})
-        setSelectedLayerSprite({x: -1, y: -1})
-        setHistory([])
-        setTilemap({
-            width: 10,
-            height: 10,
-            tileSize: 32,
-            spriteSheetPath: '',
-            layers: [
-                { id: 'floor', name: 'Pisos', visible: true, sprites: [] },
-                { id: 'walls', name: 'Paredes', visible: true, sprites: [] },
-                { id: 'door', name: 'Portas e Janelas', visible: true, sprites: [] },
-                { id: 'furniture', name: 'Móveis', visible: true, sprites: [] },
-                { id: 'utensils', name: 'Utensílios', visible: true, sprites: [] }
-            ],
-        })
-    }
+        const type = fileFormat === 'json' ? 'application/json' : 'application/xml'
 
-    const download = () => {
-        const jsonString = JSON.stringify(tilemap, null, 2);
-        const blob = new Blob([jsonString], { type: 'application/json' });
+        const blob = new Blob([fileString], { type: type});
+
         const url = URL.createObjectURL(blob);
 
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'tilemap.json';
+        link.download = `map.${fileFormat}`;
+
         document.body.appendChild(link);
         link.click();
+
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     }
 
-    // SALVAR
-    const [isModalSave, setModalSave] = useState(false);
-    const openModalSave = () => {
-    
-        // 1. ADAPTAR: Converte o JSON do seu editor para o formato E3Map.
-        const e3Map = adaptarAppJsonParaE3Map(tilemap);
-        console.log(JSON.stringify(e3Map));
+    const [isModal, setModal] = useState(false);
+    const [modalTitle, setModalTitle] = useState('');
+    const [fileFormat, setFileFormat] = useState('json');
+    const [option, setOption] = useState('save');
 
-        const a = convertMap(e3Map);
-        //console.log(a);
-       // console.log(JSON.stringify(tilemap))
-
-        //setModalSave(true);
-
-        //const xml = converterJsonParaXml(tilemap);
-        //console.log(xml)
-
-
-
-    }
-    const saveJSON = () => {
-        download();
-        setModalSave(false);
-    }
-    const cancel = () => {
-        setModalSave(false);
+    const openModal = (opt) => {
+        setModal(true)
+        setOption(opt)
+        const title = opt === 'save' ? "Salvar Mapa" : "Novo Mapa"
+        setModalTitle(title)
     }
 
-    // NOVO
-    const [isModalNew, setModalNew] = useState(false);
-    const openModalNew = () => {
-        if(history.length > 0){
-            setModalNew(true)
+    const save = () => {
+        let fileString = ''
+        if(fileFormat == 'json'){
+            console.log('SALVANDO EM JSON')
+            const e3Map = adaptarAppJsonParaE3Map(tilemap);
+            const map = convertMap(e3Map);
+            fileString = JSON.stringify(map)
         }
-    }
-    const saveNew = () => {
-        download()
-        reset()
-        setModalNew(false)
-    }
-    const cancelNew = () => {
-        reset()
-        setModalNew(false)
+        else{
+            console.log('SALVANDO EM XML');
+            fileString = converterJsonParaXml(tilemap);
+        }
+        setModal(false)
+        download(fileFormat, fileString);
     }
 
-    // CARREGAR
+    const target = () => {
+        setModal(false)
+        window.open(window.location.href, '_blank');
+    }
+
+    const handleKey = (e, action) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            action();
+        }
+    };
+
+    const { 
+        tilemap, setTilemap,
+        setSelectedSprite, 
+        setSelectedLayerSprite, 
+        setHistory, history,
+        isMenuOpen, setIsMenuOpen, setDisplacementSidebarMenu, 
+        setIsElementsOpen 
+    } = useTileMap();
+
+    const handleMenuOpen = () => { setIsMenuOpen(prev => !prev); }
+
+    useEffect(() => {
+        if(isMenuOpen) setIsElementsOpen(false);
+    }, [isMenuOpen])
+
     const fileInputRef = useRef(null);
-        const handleFileChange = (event) => {
+
+    const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             const fileName = file.name;
@@ -127,9 +121,7 @@ export function Menu(){
 
                     case "xml":
                         const retorno = converterXmlParaJson(content)
-
                         setTilemap(retorno)
-                        
                         break;
 
                     default:
@@ -143,80 +135,94 @@ export function Menu(){
         event.target.value = null;
     };
 
-    const handleKey = (e, action) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            action();
-        }
-    };
-
-    return(
-        <div 
-            className={styles.menuContainer} 
-            role="menubar" 
-            aria-label={t("menu_main")}
-        >
+    return(        
+        <Sidebar
+            title="Menu"
+            icon={<IoMenu/>}
+            borderTopRightRadiusButton={15}
+            borderBottomRightRadiusButton={15}
+            borderBottomRightRadiusBody={15}
+            positionTop={25}
+            active={isMenuOpen}
+            toggleSidebar={isMenuOpen}
+            onClick={handleMenuOpen}
+            setDisplacementSidebar={setDisplacementSidebarMenu}
+        >   
             <Modal 
-                isOpen={isModalNew} 
-                onConfirm={saveNew}
-                onCancel={cancelNew}
+                active={isModal}
+                setActive={setModal}
+                title={modalTitle}
+                showButtonClose={false}
+                onConfirm={(option === 'save' ? save : target)}
             >
-                <h2>{t("save_message")}</h2>
+                <div className={styles.contentModal}>
+                {option === 'save' ? (
+                    <div>
+                        <h2 className={styles.titleModal}> Qual formato deseja salvar o projeto em andamento? </h2>
+                        <select onChange={(e) => setFileFormat(e.target.value)} className={styles.selectTile}>
+                            <option value="json" selected>JSON</option>
+                            <option value="xml">XML</option>
+                        </select>
+                    </div>
+                ) : (
+                    <h2 className={styles.titleModal}>Deseja iniciar um novo mapa?</h2>
+                )}
+                </div>
             </Modal>
 
-            <Modal 
-                isOpen={isModalSave} 
-                onConfirm={saveJSON}
-                onCancel={cancel}
-            >
-                <h2>{t("save_message")}</h2>
-            </Modal>
-
-            <div 
-                className={styles.menuItem} 
-                onClick={openModalNew}
-                onKeyDown={(e) => handleKey(e, openModalNew)}
-                role="menuitem"
-                tabIndex={0}
-                aria-label={t("new")}
-            >
-                <FaPlus className={styles.menuIcone} />
-                <h3>{t("new")}</h3>
-            </div>
-
-            <div 
-                className={styles.menuItem} 
-                onClick={openModalSave}
-                onKeyDown={(e) => handleKey(e, openModalSave)}
-                role="menuitem"
-                tabIndex={0}
-                aria-label={t("save")}
-            >
-                <IoMdSave className={styles.menuIcone} />
-                <h3>{t("save")}</h3>
-            </div>
-
-            <div 
-                className={styles.menuItem} 
-                tabIndex={0}
-                aria-label={t("open")}
-            >
-                <label htmlFor="tile" style={ { display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' } }>
-                    <FaFolderOpen className={styles.menuIcone} />
-                    <h3>{t("open")}</h3>
-                </label>
+            <div aria-label={"menu"} className={styles.menuContainer} role="menubar">
+                <div className={styles.divider} style={{marginTop: '-10px'}}></div>
                 
-                <input 
-                    type="file" 
-                    accept=".json, .xml"
-                    id="tile" 
-                    ref={fileInputRef} 
-                    onChange={handleFileChange} 
-                    style={{ display: "none" }}
-                    aria-hidden="true"
-                    tabIndex={-1}
-                />
+                <div 
+                    className={styles.menuItem} 
+                    onClick={() => openModal("new")}
+                    onKeyDown={(e) => handleKey(e, openModal("new"))}
+                    role="menuitem"
+                    tabIndex={0}
+                    aria-label={"novo"}
+                >
+                    <FaPlus className={styles.menuIcone} />
+                    <h3>{t('new')}</h3>
+                </div>
+
+                <div className={styles.divider}></div>
+
+                <div 
+                    className={styles.menuItem} 
+                    onClick={() => openModal("save")}
+                    onKeyDown={(e) => handleKey(e, openModal("save"))}
+                    role="menuitem"
+                    tabIndex={0}
+                    aria-label={"salvar"}
+                >
+                    <IoMdSave className={styles.menuIcone} />
+                    <h3>{t('save')}</h3>
+                </div>
+
+                <div className={styles.divider}></div>
+
+                <div 
+                    className={styles.menuItem} 
+                    tabIndex={0}
+                    aria-label={"abrir"}
+                >
+                    <label htmlFor="tile" style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+                        <FaFolderOpen className={styles.menuIcone} />
+                        <h3>{t('open')}</h3>
+                    </label>
+                    
+                    <input 
+                        type="file" 
+                        accept=".json, .xml"
+                        id="tile" 
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        style={{ display: "none" }}
+                        aria-hidden="true"
+                        tabIndex={-1}
+                    />
+                </div>
             </div>
-        </div>
+        </Sidebar>
     )
 }

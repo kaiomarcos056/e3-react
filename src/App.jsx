@@ -1,35 +1,19 @@
-import TileMapEditor from './TileMapEditor';
-
 import './styles/theme.css';
 import './styles/global.css';
 
-import { LuClipboardList } from "react-icons/lu";
-import { IoMenu } from "react-icons/io5";
-import { LuMenu } from "react-icons/lu";
+import './language/i18nify';
 
-import { useState, useRef, useEffect } from 'react';
+import { TileMapProvider } from "./contexts/TileMapContext";
 
-import { Layer } from './components/Layer';
-import { ContainerButtons } from './components/ContainerButtons'
-import { Sidebar } from './components/Sidebar';
-import { Settings } from './components/Settings';
-import { TileMapProvider } from './contexts/TileMapContext';
-import { Topbar } from './components/Topbar';
+import { useEffect, useState } from 'react';
+import { Configuration } from './components/Configurations';
 import { ViewLayers } from './components/ViewLayers';
 import { Menu } from './components/Menu';
-import { History } from './components/History';
 import { View3D } from './components/View3D';
 
-import { Heading } from './components/Heading';
 
-import './language/i18nify';
-import { Atributos } from './components/Atributos';
-import { Banner } from './components/Banner';
-
-import { FaEye, FaQuestion, FaSlidersH } from 'react-icons/fa';
-
-import { SidebarGroup } from './components/SidebarGroup';
-import { Modal } from './components/Modal';
+import { Attributes } from './components/Attributes';
+import { Banners } from './components/Banners';
 
 import { ChangeTexture } from './components/ChangeTexture';
 
@@ -40,10 +24,14 @@ import { useCallback } from 'react';
 import {useTranslation} from 'react-i18next';
 import { useSpeech } from './hook/useSpeech';
 import { TilemapCanvas } from './components/TilemapCanvas';
-import { Tooltip } from './components/Tooltip';
 import { initializeTileData } from './utils/tileService';
 
+import { Category } from './components/Category';
+import { Undo } from './components/Undo';
+import { LayerList } from './components/LayerList';
+
 export function App() {
+    /*
     const [error, setError] = useState(null);
 
     const [isInitialized, setIsInitialized] = useState(false);
@@ -60,7 +48,7 @@ export function App() {
 
     const {t} = useTranslation();
 
-    const [activeCard, setActiveCard] = useState(null);
+    
 
     const keyMap = {
         SAVE: 'ctrl+s',
@@ -118,51 +106,22 @@ export function App() {
         setMarginCardSideBar(id === 'menu' && id !== activeSidebar ? 130 : 0);
         setActiveSidebar(activeSidebar === id ? null : id)
     }
+    */
 
     return (
-        // <View3D  />
-
         <TileMapProvider>
-            <HotKeys keyMap={keyMap} handlers={handlers}>
-            {/* <Heading/> */}
-            {/* <Layer></Layer> */}
-            {/* <TileMapEditor /> */}
-            {/* <Tooltip/> */}
+        {/* <HotKeys keyMap={keyMap} handlers={handlers}> */}
             <TilemapCanvas/>
-
-            <View3D/>
-
-            <Sidebar 
-                titulo="Menu" 
-                estilo={{ top: '35px' }} 
-                icon={<IoMenu />}
-                isOpen={activeSidebar === 'menu'}
-                onToggle={() => handleActiveSideBar('menu')}
-            >
-                <Menu/>
-            </Sidebar>
-
-            <Sidebar 
-                titulo="Elementos" 
-                estilo={{ top: '115px' }} 
-                icon={<LuClipboardList />}
-                isOpen={activeSidebar === 'elementos'}
-                onToggle={() => handleActiveSideBar('elementos')}
-                styleCard={{marginLeft: marginCardSideBar+'px'}}
-            >
-                <Layer/>
-            </Sidebar>
-
-            <Settings/>
-
-            <History/>
-
-            <ContainerButtons activeCard={activeCard} setActiveCard={setActiveCard} />
-
-            <SidebarGroup/>
-
-            
-            </HotKeys>
+            <Category/>
+            <Menu/>
+            <LayerList/>
+            <Attributes/>
+            <Banners/>
+            <ViewLayers/>
+            {/* <View3D/> */}
+            <Configuration/>
+            <Undo/>
+        {/* </HotKeys> */}
         </TileMapProvider>
     );
 }

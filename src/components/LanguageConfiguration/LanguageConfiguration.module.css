@@ -1,0 +1,32 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 8px 0;
+    border-radius: 5px;
+}
+
+.title{
+    color: white;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.label{
+    cursor: pointer;
+    display: flex;
+}
+
+.img{
+    border-radius: 5px;
+    border: 2px solid transparent;
+}
+
+.selected{
+    border: 3px solid var(--secundary);
+}
+
+.radio{
+    display: none;
+}

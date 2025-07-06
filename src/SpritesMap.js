@@ -333,6 +333,7 @@ export const spritesMap = [
             {
                 name: 'Guarda Corpo',
                 path: '/sprites/walls/guarda-corpo.png',
+                soundPath: '/audios/wall/GuardrailWallCollision.wav',
                 size: [1, 1],
                 rotation: 0,
                 visible: true,
@@ -351,6 +352,7 @@ export const spritesMap = [
             {
                 name: 'Gesso',
                 path: '/sprites/walls/gesso.png',
+                soundPath: '/audios/wall/PlasterCollision.wav',
                 size: [1, 1],
                 rotation: 0,
                 visible: true,
@@ -369,6 +371,7 @@ export const spritesMap = [
             {
                 name: 'Madeira',
                 path: '/sprites/walls/madeira.png',
+                soundPath: '/audios/wall/WoodenWallCollision.wav',
                 size: [1, 1],
                 rotation: 0,
                 visible: true,
@@ -387,6 +390,7 @@ export const spritesMap = [
             {
                 name: 'Plástico',
                 path: '/sprites/walls/plastico.png',
+                soundPath: '/audios/wall/PlasticCollision.wav',
                 size: [1, 1],
                 rotation: 0,
                 visible: true,
@@ -405,6 +409,7 @@ export const spritesMap = [
             {
                 name: 'Tijolo',
                 path: '/sprites/walls/tijolo.png',
+                soundPath: '/audios/wall/BrickWallCollision.wav',
                 size: [1, 1],
                 rotation: 0,
                 visible: true,
@@ -423,6 +428,7 @@ export const spritesMap = [
             {
                 name: 'Vidro',
                 path: '/sprites/walls/vidro.png',
+                soundPath: '/audios/wall/GlassWallCollision.wav',
                 size: [1, 1],
                 rotation: 0,
                 visible: true,
@@ -441,6 +447,7 @@ export const spritesMap = [
             {
                 name: 'Escada',
                 path: '/sprites/walls/escada-01.png',
+                soundPath: '/audios/wall/StairsCollision.wav',
                 size: [1, 2],
                 rotation: 0,
                 visible: true,
@@ -488,7 +495,8 @@ export const spritesMap = [
         sprites: [
             { 
                 name: 'Porta Trancada', 
-                path: '/sprites/door/porta-trancada-01.png', 
+                path: '/sprites/door/porta-trancada-01.png',
+                soundPath: '/audios/doors/doorOpen.wav',
                 size: [2, 1],  
                 rotation: 0, 
                 visible: true, 
@@ -514,7 +522,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Porta Fechada', 
-                path: '/sprites/door/porta-fechada-01.png', 
+                path: '/sprites/door/porta-fechada-01.png',
+                soundPath: '/audios/doors/doorOpen.wav',
                 size: [2 ,1],
                 rotation: 0, 
                 visible: true, 
@@ -540,7 +549,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Porta Aberta', 
-                path: '/sprites/door/porta-aberta-01.png', 
+                path: '/sprites/door/porta-aberta-01.png',
+                soundPath: '/audios/doors/doorClose.wav',
                 size: [2 ,1],
                 rotation: 0, 
                 visible: true, 
@@ -591,7 +601,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Janela de Aço', 
-                path: '/sprites/door/janela-aco-01.png', 
+                path: '/sprites/door/janela-aco-01.png',
+                soundPath: '/audios/doors/GlassWindowCollision.wav',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -624,6 +635,7 @@ export const spritesMap = [
             {
                 name: 'Cama de Casal',
                 path: '/sprites/furniture/cama-casal-01.png',
+                soundPath: '/audios/furniture/CouplesBedCollision.wav',
                 size: [2, 2],
                 rotation: 0,
                 visible: true,
@@ -666,7 +678,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Armário', 
-                path: '/sprites/furniture/armario-01.png', 
+                path: '/sprites/furniture/armario-01.png',
+                soundPath: '/audios/furniture/IronClosetCollision.wav',
                 size: [2, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -709,7 +722,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Guarda Roupa', 
-                path: '/sprites/furniture/guarda-roupa-01.png', 
+                path: '/sprites/furniture/guarda-roupa-01.png',
+                soundPath: '/audios/furniture/WardrobeCollision.wav',
                 size: [2, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -752,7 +766,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Mesa de Jantar', 
-                path: '/sprites/furniture/mesa-jantar-01.png', 
+                path: '/sprites/furniture/mesa-jantar-01.png',
+                soundPath: '/audios/furniture/TableCollision.wav',
                 size: [2, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -779,7 +794,7 @@ export const spritesMap = [
             },
             { 
                 name: 'Poltrona', 
-                path: '/sprites/furniture/poltrona-01.png', 
+                path: '/sprites/furniture/poltrona-01.png',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -818,7 +833,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Cadeira', 
-                path: '/sprites/furniture/cadeira-01.png', 
+                path: '/sprites/furniture/cadeira-01.png',
+                soundPath: '/audios/furniture/ChairCollision.wav',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -857,7 +873,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Criado Mudo', 
-                path: '/sprites/furniture/criado-mudo-01.png', 
+                path: '/sprites/furniture/criado-mudo-01.png',
+                soundPath: '/audios/furniture/BureauCollision.wav',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -896,7 +913,7 @@ export const spritesMap = [
             },
             { 
                 name: 'Cômoda', 
-                path: '/sprites/furniture/comoda-01.png', 
+                path: '/sprites/furniture/comoda-01.png',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -935,7 +952,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Cama de Solteiro', 
-                path: '/sprites/furniture/cama-solteiro-01.png', 
+                path: '/sprites/furniture/cama-solteiro-01.png',
+                soundPath: '/audios/furniture/SinglesBedCollision.wav',
                 size: [1, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -976,7 +994,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Estante', 
-                path: '/sprites/furniture/estante-01.png', 
+                path: '/sprites/furniture/estante-01.png',
+                soundPath: '/audios/furniture/ShelfCollision.ogg',
                 size: [1, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -1017,7 +1036,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Mesa', 
-                path: '/sprites/furniture/mesa-01.png', 
+                path: '/sprites/furniture/mesa-01.png',
+                soundPath: '/audios/furniture/TableCollision.wav',
                 size: [2, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1043,7 +1063,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Sofá', 
-                path: '/sprites/furniture/sofa-01.png', 
+                path: '/sprites/furniture/sofa-01.png',
+                soundPath: '/audios/furniture/SofaCollision.wav',
                 size: [2, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1091,7 +1112,8 @@ export const spritesMap = [
         sprites: [
             { 
                 name: 'Computador', 
-                path: '/sprites/eletronics/computador-01.png', 
+                path: '/sprites/eletronics/computador-01.png',
+                soundPath: '/audios/eletronics/Computer.ogg',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -1130,7 +1152,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Copiadora', 
-                path: '/sprites/eletronics/copiadora.png', 
+                path: '/sprites/eletronics/copiadora.png',
+                soundPath: '/audios/eletronics/CopyMachine.wav',
                 size: [1, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -1149,7 +1172,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Fogão', 
-                path: '/sprites/eletronics/fogao-01.png', 
+                path: '/sprites/eletronics/fogao-01.png',
+                soundPath: '/audios/eletronics/Oven.ogg',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -1188,7 +1212,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Geladeira', 
-                path: '/sprites/eletronics/geladeira-01.png', 
+                path: '/sprites/eletronics/geladeira-01.png',
+                soundPath: '/audios/eletronics/Fridge.wav',
                 size: [1, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -1229,7 +1254,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Máquina de Lavar', 
-                path: '/sprites/eletronics/maquina-de-lavar-01.png', 
+                path: '/sprites/eletronics/maquina-de-lavar-01.png',
+                soundPath: '/audios/eletronics/WashingMachineDoor.ogg',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -1268,7 +1294,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Microondas', 
-                path: '/sprites/eletronics/microondas-01.png', 
+                path: '/sprites/eletronics/microondas-01.png',
+                soundPath: '/audios/eletronics/Microwave.ogg',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1307,7 +1334,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Televisão', 
-                path: '/sprites/eletronics/tv-01.png', 
+                path: '/sprites/eletronics/tv-01.png',
+                soundPath: '/audios/eletronics/TV.ogg',
                 size: [1, 1],
                 rotation: 0, 
                 visible: true, 
@@ -1353,7 +1381,8 @@ export const spritesMap = [
         sprites: [
             { 
                 name: 'Cone', 
-                path: '/sprites/utensils/cone.png', 
+                path: '/sprites/utensils/cone.png',
+                soundPath: '/audios/objects/Cone.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1371,7 +1400,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Abajur', 
-                path: '/sprites/utensils/abajur.png', 
+                path: '/sprites/utensils/abajur.png',
+                soundPath: '/audios/objects/Lamp.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1389,7 +1419,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Flor', 
-                path: '/sprites/utensils/flor.png', 
+                path: '/sprites/utensils/flor.png',
+                soundPath: '/audios/objects/Plant.wav',
                 size: [1, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -1408,7 +1439,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Lixeira', 
-                path: '/sprites/utensils/lixeira.png', 
+                path: '/sprites/utensils/lixeira.png',
+                soundPath: '/audios/objects/TrashCan.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1426,7 +1458,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Pia', 
-                path: '/sprites/utensils/pia-01.png', 
+                path: '/sprites/utensils/pia-01.png',
+                soundPath: '/audios/objects/Sink.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1465,7 +1498,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Piano', 
-                path: '/sprites/utensils/piano-01.png', 
+                path: '/sprites/utensils/piano-01.png',
+                soundPath: '/audios/objects/Piano.wav',
                 size: [2, 2], 
                 rotation: 0, 
                 visible: true, 
@@ -1492,7 +1526,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Privada', 
-                path: '/sprites/utensils/privada-01.png', 
+                path: '/sprites/utensils/privada-01.png',
+                soundPath: '/audios/objects/Toilet.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1531,7 +1566,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Quadro', 
-                path: '/sprites/utensils/quadro-01.png', 
+                path: '/sprites/utensils/quadro-01.png',
+                soundPath: '/audios/objects/Painting.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1570,7 +1606,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Violão', 
-                path: '/sprites/utensils/violao.png', 
+                path: '/sprites/utensils/violao.png',
+                soundPath: '/audios/objects/Guitar.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1595,7 +1632,8 @@ export const spritesMap = [
         sprites: [
             { 
                 name: 'Batedeira', 
-                path: '/sprites/interactive/batedeira.png', 
+                path: '/sprites/interactive/batedeira.png',
+                soundPath: '/audios/goals/FoodMixerWin.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1613,7 +1651,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Bebê', 
-                path: '/sprites/interactive/bebe.png', 
+                path: '/sprites/interactive/bebe.png',
+                soundPath: '/audios/goals/KidSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1631,7 +1670,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Cachorro', 
-                path: '/sprites/interactive/cachorro-01.png', 
+                path: '/sprites/interactive/cachorro-01.png',
+                soundPath: '/audios/goals/DogSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1670,7 +1710,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Celular', 
-                path: '/sprites/interactive/celular.png', 
+                path: '/sprites/interactive/celular.png',
+                soundPath: '/audios/goals/CellphoneWin.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1688,7 +1729,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Chaleira', 
-                path: '/sprites/interactive/chaleira.png', 
+                path: '/sprites/interactive/chaleira.png',
+                soundPath: '/audios/goals/TeaKettleSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1706,7 +1748,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Despertador', 
-                path: '/sprites/interactive/despertador.png', 
+                path: '/sprites/interactive/despertador.png',
+                soundPath: '/audios/goals/AlarmClockSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1724,7 +1767,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Gato', 
-                path: '/sprites/interactive/gato-01.png', 
+                path: '/sprites/interactive/gato-01.png',
+                soundPath: '/audios/goals/CatSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1763,7 +1807,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Impressora', 
-                path: '/sprites/interactive/impressora.png', 
+                path: '/sprites/interactive/impressora.png',
+                soundPath: '/audios/goals/PrinterSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1781,7 +1826,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Inseto', 
-                path: '/sprites/interactive/inseto-01.png', 
+                path: '/sprites/interactive/inseto-01.png',
+                soundPath: '/audios/goals/InsectSound.mp3',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, translate: 'bug',
@@ -1819,7 +1865,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Liquidificador', 
-                path: '/sprites/interactive/liquidificador.png', 
+                path: '/sprites/interactive/liquidificador.png',
+                soundPath: '/audios/goals/BlenderSound.wav',
                 size: [1, 1],
                 rotation: 0,
                 visible: true, 
@@ -1837,7 +1884,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Passaro', 
-                path: '/sprites/interactive/pombo-01.png', 
+                path: '/sprites/interactive/pombo-01.png',
+                soundPath: '/audios/goals/BirdSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1876,7 +1924,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Radio', 
-                path: '/sprites/interactive/radio.png', 
+                path: '/sprites/interactive/radio.png',
+                soundPath: '/audios/goals/RadioSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1894,7 +1943,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Sapo', 
-                path: '/sprites/interactive/sapo-01.png', 
+                path: '/sprites/interactive/sapo-01.png',
+                soundPath: '/audios/goals/FrogSound.mp3',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1933,7 +1983,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Secador', 
-                path: '/sprites/interactive/secador.png', 
+                path: '/sprites/interactive/secador.png',
+                soundPath: '/audios/goals/HairDryerSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 
@@ -1951,7 +2002,8 @@ export const spritesMap = [
             },
             { 
                 name: 'Ventilador', 
-                path: '/sprites/interactive/ventilador.png', 
+                path: '/sprites/interactive/ventilador.png',
+                soundPath: '/audios/goals/FanSound.wav',
                 size: [1, 1], 
                 rotation: 0, 
                 visible: true, 

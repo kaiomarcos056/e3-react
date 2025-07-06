@@ -1,0 +1,22 @@
+.card{
+    cursor: pointer;
+    border: none;
+    background-color: var(--gray-300);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--size-font-button);
+}
+
+.active{
+    background-color: var(--secundary);
+}
+
+.card:hover{
+    background-color: var(--primary);
+}
+
+.card:focus {
+    outline: 2px solid var(--secundary);
+    outline-offset: 2px;
+}

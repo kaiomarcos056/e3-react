@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useEffect, useRef, useState } from "react";
 
-export function Tooltip({texto = "", x = 0, y = 0}){
+export function Tooltip({text = "", x = 0, y = 0}){
 
     const {t} = useTranslation();
 
@@ -38,8 +38,7 @@ export function Tooltip({texto = "", x = 0, y = 0}){
             className={styles.tooltipFloating}
             style={position}
         >
-            {/* {t(texto)} */}
-            texto
+            {t(text)}
         </div>
     );
 }

@@ -8,4 +8,8 @@
     --gray-200: #ADADAD;
     --gray-300: #727272;
     --gray-400: #e4e4e4;
+
+    --size-button: 60px;
+    --border-margin: 25px;
+    --size-font-button: calc(var(--size-button)/2);
 }

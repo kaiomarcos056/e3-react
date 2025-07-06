@@ -1,62 +1,86 @@
-import { Tooltip } from '../Tooltip';
-import styles from './Sidebar.module.css';
+import styles from './Sidebar.module.css'
 
-import { useState } from 'react';
+import { Button } from '../Button'
+import { SidebarBody } from '../SidebarBody'
+import { SidebarHeader } from '../SidebarHeader'
+import { useEffect, useRef } from 'react';
+import { useTileMap } from '../../contexts/TileMapContext';
 
-export function Sidebar( { titulo, icon, estilo, children, isOpen, onToggle, styleCard = {} }) {
+export function Sidebar({
+    children, 
+    icon, 
+    title, 
+    horizontalAlignment = "top", 
+    verticalAlignment = "right",
+    borderTopLeftRadiusButton = 0,
+    borderTopRightRadiusButton = 0,
+    borderBottomRightRadiusButton = 0,
+    borderBottomLeftRadiusButton = 0,
+    borderTopLeftRadiusBody = 0,
+    borderTopRightRadiusBody = 0,
+    borderBottomRightRadiusBody = 0,
+    borderBottomLeftRadiusBody = 0,
+    positionRight,
+    positionLeft,
+    positionTop,
+    positionBottom,
+    toggleSidebar = false,
+    onClick,
+    setDisplacementSidebar,
+    active = false
+}){
+    const contentRef = useRef(null);
+    useEffect(() => {
+        if (contentRef.current && typeof setDisplacementSidebar === 'function') {
+            const currentWidth = contentRef.current.offsetWidth;
+            setDisplacementSidebar(currentWidth);
+        }
+    }, [toggleSidebar]);
 
-  const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, text: '' });
-
-  const handleMouseMove = (e, name) => {
-    setTooltip({
-        visible: true,
-        x: e.clientX,
-        y: e.clientY,
-        text: name
-    });
-  }
-  const handleMouseLeave = () => {
-    setTooltip({ visible: false, x: 0, y: 0, text: '' });
-  };
-
-  return (
-    <div className={styles.sidebarContainer} style={estilo}>
-      {/* <div className={`${styles.sidebar} ${sidebarOpen ? styles.expanded : 'collapsed'}`}> */}
-      <div className={`${styles.sidebar} ${isOpen ? styles.expanded : 'collapsed'}`}>
-        {/* {sidebarOpen && ( */}
-        {isOpen  && (
-          <>
-            <div className={styles.sidebarHeader}>
-              <span>{titulo}</span>
+    return(
+        <div 
+            className={styles.container}
+            style={{
+                flexDirection: `${verticalAlignment == 'right' ? 'row' : 'row-reverse'}`,
+                ...(positionTop != null && { top: `${positionTop}px` }),
+                ...(positionBottom != null && { bottom: `${positionBottom}px` }),
+                ...(positionLeft != null && { right: `${positionLeft}px` }),
+                ...(positionRight != null && { left: `${positionRight}px` }),
+            }}
+        >
+            
+            <div 
+                ref={contentRef}
+                className={styles.content}
+                style={{
+                    flexDirection: `${horizontalAlignment == 'top' ? 'column': 'column-reverse'}`,
+                    display: `${toggleSidebar ? '' : 'none'}`
+                }}
+            >
+                <SidebarHeader title={title}/>
+                <SidebarBody
+                    borderTopLeftRadius={borderTopLeftRadiusBody}
+                    borderTopRightRadius={borderTopRightRadiusBody}
+                    borderBottomRightRadius={borderBottomRightRadiusBody}
+                    borderBottomLeftRadius={borderBottomLeftRadiusBody}
+                    vertical={horizontalAlignment}
+                >
+                    {children}
+                </SidebarBody>
             </div>
 
-            <div className={styles.sidebarBody}>
-              {children}
-            </div>
-          </>
-        )}
-      </div>
-
-      <button
-        // className={`${styles.sidebarToggleButton} ${sidebarOpen ? styles.inside : styles.outside}`}
-        className={`${styles.sidebarToggleButton} ${isOpen ? styles.inside : styles.outside}`}
-        // onClick={() => setSidebarOpen(!sidebarOpen)}
-        onClick={onToggle}
-        onMouseMove={(e) => handleMouseMove(e, titulo)}
-        onMouseLeave={handleMouseLeave}
-        style={styleCard}
-        aria-label={`${titulo}`}
-        aria-selected={isOpen}
-        tabIndex={0}
-        // role="region"
-      >
-        {icon}
-      </button>
-      
-      {tooltip.visible && (
-        <Tooltip texto={tooltip.text} x={tooltip.x} y={tooltip.y}/>
-      )}
-
-    </div>
-  );
-};
+            <Button 
+                info={title}
+                borderTopLeftRadius={borderTopLeftRadiusButton}
+                borderTopRightRadius={borderTopRightRadiusButton}
+                borderBottomRightRadius={borderBottomRightRadiusButton}
+                borderBottomLeftRadius={borderBottomLeftRadiusButton}
+                style={{alignSelf:`${horizontalAlignment == 'top' ? 'start': 'end'}`}}
+                onClick={onClick}
+                active={active}
+            >
+                {icon}
+            </Button>
+        </div>
+    )
+}

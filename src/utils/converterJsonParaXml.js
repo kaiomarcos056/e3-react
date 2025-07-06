@@ -10,7 +10,7 @@ export function converterJsonParaXml(mapaJson) {
     const VOID_ID = "-1";
 
     // Mapeamento dos IDs do seu JSON para os nomes de camada esperados no XML.
-    const idMapping = {
+    const layerNameMapping = {
         floor: 'floor', 
         walls: 'walls', 
         door_and_windows: 'door_and_windows',

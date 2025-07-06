@@ -1,0 +1,33 @@
+.button{
+    cursor: pointer;
+    border: none;
+    
+    width: var(--size-button);
+    height: var(--size-button);
+
+    background-color: var(--secundary);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: var(--size-font-button);
+
+    transition: transform 0.3s ease;
+    z-index: 3;
+}
+
+.active{
+    background-color: var(--primary);
+}
+
+.button:hover{
+    background-color: var(--primary);
+    /* transform: scale(1.03); */
+}
+
+.button:focus {
+    outline: 2px solid var(--secundary);
+    outline-offset: 2px;
+}

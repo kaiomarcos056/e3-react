@@ -1,0 +1,15 @@
+.container{
+    height: var(--size-button);
+
+    background-color: var(--primary);
+    color: white;
+    padding: 0 16px 0 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: 24px;
+    text-align: center;
+}

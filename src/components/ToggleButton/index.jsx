@@ -7,7 +7,7 @@ export function ToggleButton( { ativo = false, onChange } ){
 
     const id = useId();
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     return(
         <div className={styles.buttonContainer}>
