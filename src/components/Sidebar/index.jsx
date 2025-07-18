@@ -4,7 +4,6 @@ import { Button } from '../Button'
 import { SidebarBody } from '../SidebarBody'
 import { SidebarHeader } from '../SidebarHeader'
 import { useEffect, useRef } from 'react';
-import { useTileMap } from '../../contexts/TileMapContext';
 
 export function Sidebar({
     children, 

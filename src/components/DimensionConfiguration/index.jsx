@@ -15,11 +15,9 @@ export function DimensionConfiguration(){
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // Novo tamanho da grade vindo dos inputs
         const newWidth = formWidth;
         const newHeight = formHeight;
 
-        // Atualiza o tilemap mantendo apenas os sprites dentro da nova área
         const updatedTilemap = {
             ...tilemap,
             width: newWidth,
@@ -28,7 +26,6 @@ export function DimensionConfiguration(){
                 return {
                     ...layer,
                     sprites: layer.sprites.filter(sprite => {
-                        // Remove sprites com posição fora dos novos limites
                         return sprite.x < newWidth && sprite.y < newHeight;
                     })
                 };

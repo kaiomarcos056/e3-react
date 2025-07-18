@@ -1,6 +1,6 @@
-import { useId } from 'react';
-
 import styles from './ToggleButton.module.css'
+
+import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export function ToggleButton( { ativo = false, onChange } ){

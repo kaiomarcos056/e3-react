@@ -26,10 +26,14 @@ const icons = {
 export function CategoryList(){
     const {t} = useTranslation();
 
-    const {selectedCategory, setSelectedCategory} = useTileMap();
+    const {
+        selectedCategory, setSelectedCategory,
+        setSelectedLayer
+    } = useTileMap();
 
     const handleSelectedCategory = (category) => {
         setSelectedCategory(category === selectedCategory ? null : category);
+        setSelectedLayer(category)
     }
 
     return (

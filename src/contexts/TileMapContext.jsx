@@ -9,15 +9,13 @@ export function TileMapProvider({ children }) {
     const [isAttributesOpen, setIsAttributesOpen] = useState(false);
     const [isHelpOpen, setIsHelpOpen] = useState(false);
     const [isDisplayOpen, setIsDisplayOpen] = useState(false);
-    
     const [displacementSidebarMenu, setDisplacementSidebarMenu] = useState(0);
     const [displacementSidebarHelp, setDisplacementSidebarHelp] = useState(0);
     const [displacementSidebarDisplay, setDisplacementSidebarDisplay] = useState(0);
-
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSprite, setSelectedSprite] = useState({});
     const [selectedLayerSprite, setSelectedLayerSprite] = useState(null);
-
+    const [selectedLayer, setSelectedLayer] = useState(null);
     const [history, setHistory] = useState([])
     const [settingsOpen, setSettingsOpen] = useState(true)
     const [hoverCell, setHoverCell] = useState(null)
@@ -39,7 +37,6 @@ export function TileMapProvider({ children }) {
         ],
     });
 
-
     return (
         <TileMapContext.Provider value={
             {
@@ -52,7 +49,8 @@ export function TileMapProvider({ children }) {
                 displacementSidebarDisplay, setDisplacementSidebarDisplay,
                 displacementSidebarHelp, setDisplacementSidebarHelp,
                 selectedCategory, setSelectedCategory,
-                selectedSprite, setSelectedSprite, 
+                selectedSprite, setSelectedSprite,
+                selectedLayer, setSelectedLayer,
                 selectedLayerSprite, setSelectedLayerSprite,
                 settingsOpen, setSettingsOpen,
                 hoverCell, setHoverCell,

@@ -1,6 +1,5 @@
 import { spritesMap } from "../SpritesMap";
 
-
 function findCodeInLayout(layout, codeToFind) {
     for (let r = 0; r < layout.length; r++) {
         for (let c = 0; c < layout[r].length; c++) {
@@ -12,7 +11,6 @@ function findCodeInLayout(layout, codeToFind) {
     return null;
 }
 
-
 function criarMapaDeBuscaDeSprites(spritesMap) {
     const lookupByLayer = new Map();
 
@@ -20,26 +18,18 @@ function criarMapaDeBuscaDeSprites(spritesMap) {
         
         const layerId = category.category;
         
-        // Verifica se o Map principal 'lookupByLayer' NÃO possui a chave 'layerId'
         if (!lookupByLayer.has(layerId)) {
-            // Se não possuir, cria uma nova entrada no Map principal:
-            // - a chave é 'layerId'
-            // - o valor é um novo Map vazio, para armazenar dados relacionados a esse layer
             lookupByLayer.set(layerId, new Map());
         }
 
-        // Recupera o Map interno associado à chave 'layerId' dentro do Map principal 'lookupByLayer'
-        // Esse Map interno armazena os dados específicos daquele layer
         const innerMap = lookupByLayer.get(layerId);
 
-        // Percorrendo todos os sprites de todas as camdas
         for (const spriteTemplate of category.sprites) {
                 
             for (const rotationKey in spriteTemplate.rotations) {
                 
                 const rotationData = spriteTemplate.rotations[rotationKey];
 
-                // CRIA A DEFINIÇÃO COMPLETA DO SPRITE PARA ESTA ROTAÇÃO
                 const spriteDefinition = {
                     ...spriteTemplate,
                     path: rotationData.path,
@@ -61,7 +51,6 @@ function criarMapaDeBuscaDeSprites(spritesMap) {
 
 export function converterJsonParaJson(json) {
     
-    // CRIANDO MAPEAMENTO DO spriteMap.js POR PONTO ANCORA
     const pesquisaDeSprite = criarMapaDeBuscaDeSprites(spritesMap);
 
     const { size } = json;
@@ -99,11 +88,8 @@ export function converterJsonParaJson(json) {
     for (const layer in json.layers) {
         const sprites = json.layers[layer];
 
-        // O NOME DA LAYER NO JSON OTIMIZADO É DIFERENTE DOS DEMAIS MAPEAMENTOS
-                // POR ISSO TENHO QUE CONVERTER A NOMENCLATURA
         const nomeDaLayerNoMap = layersJSON.get(layer);
 
-        // PEGANDO TILES MAPEADOS DE UMA LAYER ESPECIFICA
         const pesquisaDeSpritePorLayer = pesquisaDeSprite.get(nomeDaLayerNoMap);
 
         const tileMapLayers = tilemap.layers.find( layer => layer.id === nomeDaLayerNoMap);
@@ -138,11 +124,9 @@ export function converterJsonParaJson(json) {
                 
                 const [cols, rows] = [layout[0].length, layout.length];
                 
-                // Encontra a posição relativa da âncora dentro do seu próprio layout.
                 const relativePos = findCodeInLayout(layout, anchorCode);
                 if (!relativePos) continue;
 
-                // Calcula o canto superior esquerdo do objeto.
                 const topLeftX = anchorX - relativePos.col;
                 const topLeftY = anchorY - relativePos.row;
 
@@ -171,5 +155,4 @@ export function converterJsonParaJson(json) {
     }
 
     return tilemap;
-    
 }

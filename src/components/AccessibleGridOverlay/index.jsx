@@ -1,31 +1,13 @@
-import { useEffect } from "react";
 import styles from "./AccessibleGridOverlay.module.css";
-import { useSpeech } from "../../hook/useSpeech";
 import { useTileMap } from "../../contexts/TileMapContext";
 
-export function AccessibleGridOverlay({ rows, cols, cellSize, getTileInfo, setTile }) {
-    const { speak } = useSpeech();
+export function AccessibleGridOverlay({ rows, cols, cellSize, getTileInfo }) {
 
-
-    const { 
-        tilemap, 
-        setTilemap, 
-        selectedSprite, 
-        selectedLayerSprite, 
-        setSelectedLayerSprite, 
-        stageRef, 
-        stageSize, 
-        setHistory,
-        hoverCell, setHoverCell
-    } = useTileMap();
+    const { tilemap, setTilemap, selectedSprite, setHoverCell } = useTileMap();
 
     const handleKeyDown = (e, row, col) => {
         const current = getTileInfo(row, col);
         if (e.key === " " || e.key === "Enter") {
-            //setTile(row, col); // ou toggle tile, por exemplo
-            //speak(`Marcado célula ${row + 1}, ${col + 1}`);
-            //e.preventDefault();
-            console.log(`COLUNA: ${col} - LINHA ${row}`)
             const updatedLayers = tilemap.layers.map(layer => {
                 if (layer.id !== selectedSprite.category) return layer;
 
@@ -64,8 +46,6 @@ export function AccessibleGridOverlay({ rows, cols, cellSize, getTileInfo, setTi
     setHoverCell({ row, col })
   }
 
-  //const a = 100;
-
   return (
     <div
       className={styles.gridOverlay}
@@ -76,17 +56,14 @@ export function AccessibleGridOverlay({ rows, cols, cellSize, getTileInfo, setTi
       {[...Array(rows)].map((_, row) => (
         <div role="row" className={styles.row} key={row}>
           {[...Array(cols)].map((_, col) => {
-            const tile = getTileInfo(row, col);
             return (
               <div
                 key={col}
                 id={`cell-${row}-${col}`}
                 role="gridcell"
                 tabIndex={0}
-                // aria-label={`Célula linha ${row + 1}, coluna ${col + 1}, tipo: ${tile?.type ?? "vazio"}`}
                 aria-label={`Célula linha ${row + 1}, coluna ${col + 1}`}
                 className={styles.cell}
-                // onFocus={() => speak(`Linha ${row + 1}, coluna ${col + 1}, tipo: ${tile?.type ?? "vazio"}`)}
                 onFocus={() => handleFocus(row, col)}
                 onKeyDown={(e) => handleKeyDown(e, row, col)}
               />

@@ -6,7 +6,6 @@ import { HiSpeakerWave } from 'react-icons/hi2';
 import { useEffect, useRef, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { spritesMap } from '../../SpritesMap';
-import { Button } from '../Button';
 import { Card } from '../Card';
 import { useTranslation } from 'react-i18next';
 

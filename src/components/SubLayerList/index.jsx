@@ -3,7 +3,6 @@ import styles from './SubLayerList.module.css'
 import { useState } from "react";
 
 import { SubLayerItem } from '../SubLayerItem';
-import { useTranslation } from 'react-i18next';
 
 export function SubLayerList({ layer }) {
 

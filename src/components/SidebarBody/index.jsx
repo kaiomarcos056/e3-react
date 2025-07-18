@@ -12,7 +12,12 @@ export function SidebarBody({
         <div 
             className={styles.container}
             style={{ 
-                borderRadius: `${borderTopLeftRadius}px ${borderTopRightRadius}px ${borderBottomRightRadius}px ${borderBottomLeftRadius}px`,
+                borderRadius: `
+                ${borderTopLeftRadius}px 
+                ${borderTopRightRadius}px 
+                ${borderBottomRightRadius}px 
+                ${borderBottomLeftRadius}px
+                `,
                 padding: `10px 10px 10px 10px`
             }}
         >

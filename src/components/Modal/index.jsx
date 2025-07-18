@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react';
 import styles from './Modal.module.css';
-
-import { IoMdClose } from "react-icons/io";
 
 export function Modal({ 
     onConfirm,
@@ -13,18 +10,11 @@ export function Modal({
     title
 }){
 
-    // const [isOpen, setIsOpen] = useState(active)
-
-    // useEffect(() => {
-    //     setIsOpen(active);
-    // }, [active]);
-
     if (!active) return null;
 
     return(
         
         <div className={styles.overlay}>
-            {/* onClick={(e) => e.stopPropagation()} */}
             <div className={styles.modal}>
 
                 {showButtonClose && 

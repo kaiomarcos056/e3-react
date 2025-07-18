@@ -1,6 +1,6 @@
 import styles from './LayerList.module.css';
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTileMap } from "../../contexts/TileMapContext";
 import { LayerItem } from '../LayerItem';
 import { Sidebar } from '../Sidebar';
@@ -10,14 +10,11 @@ import { useTranslation } from 'react-i18next';
 export function LayerList() {
     const {t} = useTranslation();
 
-    const { tilemap } = useTileMap();
-    const [openLayers, setOpenLayers] = useState({});
+    const { tilemap, isElementsOpen, setIsElementsOpen, setIsMenuOpen, displacementSidebarMenu, selectedLayer, setSelectedLayer } = useTileMap();
 
     const toggleLayer = (layerId) => {
-        setOpenLayers(prev => ({ ...prev, [layerId]: !prev[layerId] }));
+        setSelectedLayer(layerId);
     };
-
-    const { isElementsOpen, setIsElementsOpen, setIsMenuOpen, displacementSidebarMenu } = useTileMap();
 
     const handleElementsOpen = () => { setIsElementsOpen(!isElementsOpen); }
 
@@ -45,7 +42,7 @@ export function LayerList() {
                         <LayerItem
                             key={layer.id}
                             layer={layer}
-                            isOpen={openLayers[layer.id]}
+                            isOpen={selectedLayer == layer.id}
                             toggleLayer={() => toggleLayer(layer.id)}
                         />
                 ))}
