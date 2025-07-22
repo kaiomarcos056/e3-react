@@ -5,12 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import { Modal } from '../Modal';
-import { LuAxis3D } from "react-icons/lu";
-
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Tooltip } from '../Tooltip';
+import { LuAxis3D } from "react-icons/lu";
 
 export function View3D() {
   const [isModal3d, setModal3d] = useState(false);
@@ -239,7 +238,6 @@ export function View3D() {
         className={styles.card} 
         onClick={() => setModal3d(true)}
         aria-label="Pré-visualização 3D"
-        aria-selected={isModal3d}
         onMouseMove={(e) => handleMouseMove(e, "visualização 3d")}
         onMouseLeave={handleMouseLeave}
       >

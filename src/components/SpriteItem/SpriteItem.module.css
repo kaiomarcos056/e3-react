@@ -158,7 +158,8 @@
 .subLayerTile{
     display: flex;
     margin-top: 8px;
-       cursor: pointer;
+    cursor: pointer;
+    /* border: 1px solid red; */
 }
 
 .subLayerTile label{

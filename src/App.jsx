@@ -1,6 +1,5 @@
 import './styles/theme.css';
 import './styles/global.css';
-
 import './language/i18nify';
 
 import { TileMapProvider } from "./contexts/TileMapContext";
@@ -26,7 +25,7 @@ export function App() {
             <Attributes/>
             <Banners/>
             <ViewLayers/>
-            {/* <View3D/> */}
+            <View3D/>
             <Configuration/>
             <Undo/>
         </TileMapProvider>

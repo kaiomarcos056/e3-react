@@ -1,15 +1,12 @@
 import styles from './Tooltip.module.css';
 
 import { useTranslation } from 'react-i18next';
-
 import { useEffect, useRef, useState } from "react";
 
 export function Tooltip({text = "", x = 0, y = 0}){
 
     const {t} = useTranslation();
-
     const tooltipRef = useRef(null);
-
     const [position, setPosition] = useState({ left: x + 10, top: y + 10 });
 
     useEffect(() => {

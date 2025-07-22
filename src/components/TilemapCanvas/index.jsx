@@ -302,53 +302,6 @@ export function TilemapCanvas() {
         setHoverCell(null);
     };
 
-    // const drawAtCursor = (e) => {
-    //     const canvas = canvasRef.current;
-    //     const rect = canvas.getBoundingClientRect();
-    //     const mouseX = e.clientX - rect.left;
-    //     const mouseY = e.clientY - rect.top;
-
-    //     const canvasX = (mouseX - canvas.width / 2 - offset.x) / scale + (NUM_COLS * TILE_SIZE) / 2;
-    //     const canvasY = (mouseY - canvas.height / 2 - offset.y) / scale + (NUM_ROWS * TILE_SIZE) / 2;
-
-    //     const col = Math.floor(canvasX / TILE_SIZE);
-    //     const row = Math.floor(canvasY / TILE_SIZE);
-
-    //     if (col >= 0 && col < NUM_COLS && row >= 0 && row < NUM_ROWS) {
-    //         const layerIndex = tilemap.layers.findIndex(l => l.id === selectedSprite.category);
-    //         if (layerIndex === -1) return;
-
-    //         const layer = tilemap.layers[layerIndex];
-
-    //         const alreadyExists = layer.sprites.some(sprite =>
-    //             sprite.x === col &&
-    //             sprite.y === row &&
-    //             sprite.path === selectedSprite.path
-    //         );
-
-    //         if (alreadyExists) return;
-
-    //         setHistory(prev => [...prev, structuredClone(tilemap)]);
-
-    //         const updatedLayers = tilemap.layers.map((l, idx) => {
-    //             if (idx !== layerIndex) return l;
-
-    //             const updatedSprites = l.sprites.filter(
-    //                 sprite => !(sprite.x === col && sprite.y === row)
-    //             );
-
-    //             updatedSprites.push({ ...selectedSprite, x: col, y: row });
-
-    //             return { ...l, sprites: updatedSprites };
-    //         });
-
-    //         setTilemap(prev => ({
-    //             ...prev,
-    //             layers: updatedLayers
-    //         }));
-    //     }
-    // };
-
     const updateHoverCell = (e) => {
         const canvas = canvasRef.current;
         const rect = canvas.getBoundingClientRect();

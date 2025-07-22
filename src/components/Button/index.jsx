@@ -16,9 +16,17 @@ export function Button({
     style = {},
     onClick
 }){
-    const defaultTooltop = { text: '', visible: false, x: 0, y: 0 };
+    const defaultTooltop = { 
+        text: '', 
+        visible: false, 
+        x: 0, 
+        y: 0 
+    };
 
-    const [tooltip, setTooltip] = useState(defaultTooltop);
+    const [
+        tooltip, 
+        setTooltip
+    ] = useState(defaultTooltop);
 
     const handleMouseMove = (e, name) => {
         setTooltip({
@@ -29,19 +37,29 @@ export function Button({
         });
     }
 
-    const handleMouseLeave = () => { setTooltip(defaultTooltop); };
+    const handleMouseLeave = () => { 
+        setTooltip(defaultTooltop); 
+    };
 
     return(
         <>
         <button
             aria-label={info}
-            aria-selected={ariaSelected}
+            {...(role !== 'button' ? { 'aria-selected': ariaSelected } : {})}
             role={role}
             style={{ 
-                borderRadius: `${borderTopLeftRadius}px ${borderTopRightRadius}px ${borderBottomRightRadius}px ${borderBottomLeftRadius}px`,
+                borderRadius: `
+                ${borderTopLeftRadius}px 
+                ${borderTopRightRadius}px 
+                ${borderBottomRightRadius}px 
+                ${borderBottomLeftRadius}px
+                `,
                 ...style, 
             }}
-            className={`${styles.button} ${active ? styles.active : ''}`}
+            className={`
+                ${styles.button} 
+                ${active ? styles.active : ''}
+                `}
             onMouseLeave={handleMouseLeave}
             onMouseMove={(e) => handleMouseMove(e, info)}
             onClick={onClick}
@@ -49,16 +67,13 @@ export function Button({
             {children}
         </button>
 
-        {
-            tooltip.visible && 
-            (
-                <Tooltip 
-                    text={tooltip.text} 
-                    x={tooltip.x} 
-                    y={tooltip.y}
-                />
-            )
-        }
+        {tooltip.visible && (
+            <Tooltip 
+                text={tooltip.text} 
+                x={tooltip.x} 
+                y={tooltip.y}
+            />
+        )}
         </>
     )
 }

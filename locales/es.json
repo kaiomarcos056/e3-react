@@ -96,6 +96,7 @@
     "locked_door_right": "Puerta con Candado Derecha",
     "closed_door_left": "Puerta Cerrada Izquierda",
     "closed_door_right": "Puerta Cerrada Derecha",
+    "open_door": "Puerta Abierta",
     "open_door_left": "Puerta Abierta Izquierda",
     "open_door_right": "Puerta Abierta Derecha",
     "wooden_window": "Ventana de Madera",

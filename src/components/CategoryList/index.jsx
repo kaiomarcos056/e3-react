@@ -53,6 +53,7 @@ export function CategoryList(){
                     active={s.category == selectedCategory}
                     ariaSelected={s.category == selectedCategory}
                     onClick={() => handleSelectedCategory(s.category)}
+                    role = "option"
                 >
                     {icons[s.category]}
                 </Button>
