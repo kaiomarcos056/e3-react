@@ -6,7 +6,7 @@ import { useSpriteSheetMap } from '../../hook/useSpriteSheetMap';
 
 import { AccessibleGridOverlay } from '../AccessibleGridOverlay';
 import { spritesMap } from '../../SpritesMap';
-import { FaArrowsRotate } from "react-icons/fa6";
+import { FaArrowsRotate, FaTrash } from "react-icons/fa6";
 
 export function TilemapCanvas() {
     const spriteSheetMap = useSpriteSheetMap(spritesMap);
@@ -430,6 +430,30 @@ export function TilemapCanvas() {
         }
     };
 
+    const handleDeleteTile = () => {
+        if (!selectedLayerSprite) return;
+
+        setHistory(prev => [...prev, structuredClone(tilemap)]);
+
+        const { x, y, category } = selectedLayerSprite;
+
+        const updatedLayers = tilemap.layers.map(layer => {
+            if (layer.id !== category) return layer;
+
+            const updatedSprites = layer.sprites.filter(sprite => 
+                !(sprite.x === x && sprite.y === y)
+            );
+
+            return { ...layer, sprites: updatedSprites };
+        });
+
+        setTilemap(prev => ({
+            ...prev,
+            layers: updatedLayers,
+        }));
+
+        setSelectedLayerSprite(null);
+    };
 
     return (
         <div className={styles.container}>
@@ -444,20 +468,48 @@ export function TilemapCanvas() {
             />
             
             {selectedLayerSprite && (
-            <button
-                style={{
-                    position: 'absolute',
-                    top: getButtonPositionY(selectedLayerSprite.y),
-                    left: getButtonPositionX(selectedLayerSprite.x),
-                    zIndex: 10,
-                    transform: 'translate(-50%, -100%)',
-                }}
-                className={styles.rotateButton}
-                onClick={handleRotateTile}
-            >
-                <FaArrowsRotate />
-            </button>
-            )}
+            (() => {
+                const [spriteCols = 1] = selectedLayerSprite.size || [];
+
+                const leftPosition = getButtonPositionX(selectedLayerSprite.x);
+
+                const rightPosition = getButtonPositionX(selectedLayerSprite.x + spriteCols);
+                
+                const topPosition = getButtonPositionY(selectedLayerSprite.y);
+
+                return (
+                    <>
+                        <button
+                            style={{
+                                position: 'absolute',
+                                top: topPosition,
+                                left: leftPosition,
+                                zIndex: 10,
+                                transform: 'translate(-60%, -90%)', 
+                            }}
+                            className={styles.rotateButton}
+                            onClick={handleRotateTile}
+                        >
+                            <FaArrowsRotate />
+                        </button>
+
+                        <button
+                            style={{
+                                position: 'absolute',
+                                top: topPosition,
+                                left: rightPosition,
+                                zIndex: 10,
+                                transform: 'translate(-40%, -90%)',
+                            }}
+                            className={styles.rotateButton}
+                            onClick={handleDeleteTile}
+                        >
+                            <FaTrash />
+                        </button>
+                    </>
+                );
+            })()
+        )}
 
             <AccessibleGridOverlay
                 rows={NUM_ROWS}
