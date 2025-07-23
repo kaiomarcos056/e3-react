@@ -42,20 +42,7 @@ export function DimensionConfiguration(){
             </h4>
             
             <form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.inputDimension}>
-                    <label htmlFor="altura" className={styles.label}>{t('height')}</label>
-                    <input
-                        className={styles.inputNumber}
-                        type="number" 
-                        id="altura" 
-                        min={2} 
-                        value={formHeight} 
-                        onChange={(e) => setFormHeight(Number(e.target.value))} 
-                    />
-                </div>
-            
-                <p className={styles.paragraph}> X </p>
-            
+
                 <div className={styles.inputDimension}>
                     <label htmlFor="largura" className={styles.label}>{t('width')}</label>
                     <input
@@ -65,6 +52,20 @@ export function DimensionConfiguration(){
                         min={2} 
                         value={formWidth} 
                         onChange={(e) => setFormWidth(Number(e.target.value))} 
+                    />
+                </div>
+
+                <p className={styles.paragraph}> X </p>
+
+                <div className={styles.inputDimension}>
+                    <label htmlFor="altura" className={styles.label}>{t('height')}</label>
+                    <input
+                        className={styles.inputNumber}
+                        type="number" 
+                        id="altura" 
+                        min={2} 
+                        value={formHeight} 
+                        onChange={(e) => setFormHeight(Number(e.target.value))} 
                     />
                 </div>
 
