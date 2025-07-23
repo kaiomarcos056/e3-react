@@ -2,8 +2,10 @@
     position: absolute;
     top: 25px;
     right: 10%;
-    width: 64px;
-    height: 64px;
+    
+    width: var(--size-button);
+    height: var(--size-button);
+
     background-color: var(--secundary);
     border-radius: 15px;
     display: flex;
