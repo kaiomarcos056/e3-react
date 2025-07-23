@@ -40,7 +40,7 @@ function convertObjectLayer(layer, category) {
     const objects = [];
 
     const propsByCategory = getPropsByCategory();
-
+    console.log(propsByCategory)
     const categoryProps = propsByCategory[category];
 
     if (!categoryProps) return [];
@@ -93,6 +93,7 @@ export function convertMap(E3Map) {
     const [x, y] = size
     
     const optimizedSize = [x/32, y/32];
+    console.log(E3Map.persons)
 
     return {
         size: optimizedSize,

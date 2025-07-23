@@ -4,12 +4,21 @@ export const TileValues = {
 };
 
 export const CategoryValues = {
+    // FLOOR: "floor",
+    // WALL: "wall",
+    // DOOR_WINDOW: "doorwindow",
+    // FURNITURE: "furniture",
+    // ELECTRONICS: "electronics",
+    // UTENSILS: "utensils",
+    // GOALS: "goals",
+    // PLAYER: "persons",
+
     FLOOR: "floor",
-    WALL: "wall",
-    DOOR_WINDOW: "doorwindow",
+    WALL: "walls",
+    DOOR_WINDOW: "door_and_windows",
     FURNITURE: "furniture",
-    ELECTRONICS: "electronics",
+    ELECTRONICS: "eletronics",
     UTENSILS: "utensils",
-    GOALS: "goals",
+    GOALS: "interactive_elements",
     PLAYER: "persons",
 };
